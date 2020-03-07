@@ -17,6 +17,9 @@
 		2956D0C724130DB700A5F033 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2956D0C324130DB700A5F033 /* Window.cpp */; };
 		2956D0C824130DB700A5F033 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2956D0C424130DB700A5F033 /* main.cpp */; };
 		2956D0C924130DB700A5F033 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2956D0C524130DB700A5F033 /* shader.cpp */; };
+		2956D0CC241312D000A5F033 /* geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2956D0CA241312D000A5F033 /* geometry.cpp */; };
+		2956D0DA2413170800A5F033 /* sphere.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2956D0D0241315F900A5F033 /* sphere.frag */; };
+		2956D0DB2413170800A5F033 /* sphere.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2956D0CF241315DC00A5F033 /* sphere.vert */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +29,8 @@
 			dstPath = shaders;
 			dstSubfolderSpec = 16;
 			files = (
+				2956D0DA2413170800A5F033 /* sphere.frag in CopyFiles */,
+				2956D0DB2413170800A5F033 /* sphere.vert in CopyFiles */,
 				2956D0AF24130A8600A5F033 /* shader.frag in CopyFiles */,
 				2956D0B024130A8600A5F033 /* shader.vert in CopyFiles */,
 				2956D0B124130A8600A5F033 /* skybox.vert in CopyFiles */,
@@ -59,6 +64,18 @@
 		2956D0C324130DB700A5F033 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		2956D0C424130DB700A5F033 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		2956D0C524130DB700A5F033 /* shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
+		2956D0CA241312D000A5F033 /* geometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = geometry.cpp; sourceTree = "<group>"; };
+		2956D0CB241312D000A5F033 /* geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = geometry.h; sourceTree = "<group>"; };
+		2956D0CF241315DC00A5F033 /* sphere.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = sphere.vert; path = "CSE 167 FInal Project/shaders/sphere.vert"; sourceTree = "<group>"; };
+		2956D0D0241315F900A5F033 /* sphere.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = sphere.frag; path = "CSE 167 FInal Project/shaders/sphere.frag"; sourceTree = "<group>"; };
+		2956D0D3241316E400A5F033 /* sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sphere.obj; sourceTree = "<group>"; };
+		2956D0D4241316E400A5F033 /* skybox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = skybox.frag; sourceTree = "<group>"; };
+		2956D0D5241316E400A5F033 /* shader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader.vert; sourceTree = "<group>"; };
+		2956D0D6241316E400A5F033 /* sphere.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sphere.frag; sourceTree = "<group>"; };
+		2956D0D7241316E400A5F033 /* shader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader.frag; sourceTree = "<group>"; };
+		2956D0D8241316E400A5F033 /* skybox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = skybox.vert; sourceTree = "<group>"; };
+		2956D0D9241316E400A5F033 /* sphere.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sphere.vert; sourceTree = "<group>"; };
+		2956D0DC24131DD000A5F033 /* paper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = paper.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +94,8 @@
 		2956D07B2413065B00A5F033 = {
 			isa = PBXGroup;
 			children = (
+				2956D0D0241315F900A5F033 /* sphere.frag */,
+				2956D0CF241315DC00A5F033 /* sphere.vert */,
 				2956D0AB24130A8600A5F033 /* shader.frag */,
 				2956D0AC24130A8600A5F033 /* shader.vert */,
 				2956D0AE24130A8600A5F033 /* skybox.frag */,
@@ -98,6 +117,9 @@
 		2956D0862413065B00A5F033 /* CSE 167 FInal Project */ = {
 			isa = PBXGroup;
 			children = (
+				2956D0D1241316E400A5F033 /* shaders */,
+				2956D0CA241312D000A5F033 /* geometry.cpp */,
+				2956D0CB241312D000A5F033 /* geometry.h */,
 				2956D0C424130DB700A5F033 /* main.cpp */,
 				2956D0BD24130DB700A5F033 /* main.h */,
 				2956D0C124130DB700A5F033 /* Object.h */,
@@ -125,6 +147,7 @@
 		2956D0B524130C1A00A5F033 /* skybox */ = {
 			isa = PBXGroup;
 			children = (
+				2956D0DC24131DD000A5F033 /* paper.jpg */,
 				2956D0B624130C1B00A5F033 /* left.jpg */,
 				2956D0B724130C1B00A5F033 /* top.jpg */,
 				2956D0B824130C1B00A5F033 /* base.jpg */,
@@ -133,6 +156,28 @@
 				2956D0BB24130C1B00A5F033 /* front.jpg */,
 			);
 			path = skybox;
+			sourceTree = "<group>";
+		};
+		2956D0D1241316E400A5F033 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				2956D0D2241316E400A5F033 /* obj */,
+				2956D0D4241316E400A5F033 /* skybox.frag */,
+				2956D0D5241316E400A5F033 /* shader.vert */,
+				2956D0D6241316E400A5F033 /* sphere.frag */,
+				2956D0D7241316E400A5F033 /* shader.frag */,
+				2956D0D8241316E400A5F033 /* skybox.vert */,
+				2956D0D9241316E400A5F033 /* sphere.vert */,
+			);
+			path = shaders;
+			sourceTree = "<group>";
+		};
+		2956D0D2241316E400A5F033 /* obj */ = {
+			isa = PBXGroup;
+			children = (
+				2956D0D3241316E400A5F033 /* sphere.obj */,
+			);
+			path = obj;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +240,7 @@
 				2956D0C624130DB700A5F033 /* skybox.cpp in Sources */,
 				2956D0C724130DB700A5F033 /* Window.cpp in Sources */,
 				2956D0C924130DB700A5F033 /* shader.cpp in Sources */,
+				2956D0CC241312D000A5F033 /* geometry.cpp in Sources */,
 				2956D0C824130DB700A5F033 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

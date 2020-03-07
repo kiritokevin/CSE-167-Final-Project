@@ -27,8 +27,6 @@ namespace
 
     // Bunny and Dragon
     skybox* sky;
-	Object* currentObj;  // The object currently displaying.
-    Object* otherObj;
 
 	glm::vec3 eye(0, 10, 50); // Camera position.
 	glm::vec3 center(0, 0, 0); // The point we are looking at.
@@ -41,7 +39,7 @@ namespace
     glm::vec3 currentPosition;
 
 	GLuint program; // The shader program id.
-    GLuint programCurve;
+    GLuint programSphere;
     GLuint programSkybox;
 	GLuint projectionLoc; // Location of projection in shader.
 
@@ -50,7 +48,7 @@ namespace
     GLuint viewPosLoc; // eye position
 
     // Geometry nodes
-
+    Geometry* sphere;
     
     // transform nodes
 
@@ -81,6 +79,15 @@ bool Window::initializeProgram()
         return false;
     }
     
+    programSphere = LoadShaders("shaders/sphere.vert", "shaders/sphere.frag");
+    
+    // check
+    if(!programSphere)
+    {
+        std::cerr << "Failed to initialize skybox shader program" << std::endl;
+        return false;
+    }
+    
     
 
 	// Activate the shader program.
@@ -96,6 +103,7 @@ bool Window::initializeObjects()
 {
     // create skybox object
     sky = new skybox(5.0f, view, projection);
+    sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
 	return true;
 }
 
@@ -176,11 +184,8 @@ void Window::resizeCallback(GLFWwindow* window, int w, int h)
     height = h;
 	// In case your Mac has a retina display.
 	glfwGetFramebufferSize(window, &width, &height);
-//    w = w*2;
-//    h = h*2;
+
 #endif
-//	width = w ;
-//	height = h;
 
 	// Set the viewport size.
 	glViewport(0, 0, width, height);
@@ -203,8 +208,9 @@ void Window::displayCallback(GLFWwindow* window)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // draw skybox
+    sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
     sky -> draw(programSkybox, view);
-        
+    
     // Gets events, including input such as keyboard and mouse or window resizing.
     glfwPollEvents();
     // Swap buffers.

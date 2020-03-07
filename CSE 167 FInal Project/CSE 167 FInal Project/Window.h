@@ -20,6 +20,7 @@
 #include "Object.h"
 #include "shader.h"
 #include "skybox.h"
+#include "geometry.h"
 
 class Window
 {
