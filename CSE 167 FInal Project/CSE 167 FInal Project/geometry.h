@@ -48,6 +48,8 @@ public:
     ~Geometry();
     void draw(GLuint shaderProgram, glm::mat4 View, glm::mat4 Projection, glm::mat4 C);
     void update(glm::mat4 C);
+    // move the ball
+    void move(int direction);
     void loadTexture(std::vector<std::string> faces);
 };
 #endif /* geometry_hpp */

@@ -356,8 +356,6 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
             case GLFW_KEY_1:
                 break;
             case GLFW_KEY_2:
-                // direction + point
-
                 break;
                     
             case GLFW_KEY_3:
@@ -371,14 +369,45 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
 
                 break;
             case GLFW_KEY_F3:
-
                 break;
                     
             case GLFW_KEY_N:
                 break;
                 
-            // move down
+            // move left
+            case GLFW_KEY_A:
+                sphere -> move(2);
+                c -> move(2);
+                break;
+                    
+            // move right
+            case GLFW_KEY_D:
+                sphere -> move(3);
+                c -> move(3);
+                break;
+                    
+            // forward
+            case GLFW_KEY_W:
+                sphere -> move(0);
+                c -> move(0);
+                break;
+                    
+            // backward
             case GLFW_KEY_S:
+                sphere -> move(1);
+                c -> move(1);
+                break;
+                    
+            // debug collision
+            case GLFW_KEY_C:
+                if(debugCollision == 1)
+                {
+                    debugCollision = 0;
+                }
+                else
+                {
+                    debugCollision = 1;
+                }
                 break;
                     
             default:

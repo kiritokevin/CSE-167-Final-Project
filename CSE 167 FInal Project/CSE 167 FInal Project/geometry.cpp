@@ -289,6 +289,36 @@ void Geometry::update(glm::mat4 C)
 {
 }
 
+void Geometry::move(int direction)
+{
+    // forward
+    if(direction == 0)
+    {
+        // update model
+        model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,-1.0f)) * model;
+    }
+    // backward
+    else if(direction == 1)
+    {
+        // update model
+        model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,1.0f)) * model;
+    }
+    
+    // left
+    else if(direction == 2)
+    {
+        // update model
+        model = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f,0.0f,0.0f)) * model;
+    }
+    
+    // right
+    else
+    {
+        // update model
+        model = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f,0.0f,0.0f)) * model;
+    }
+}
+
 // load texture from jpeg file
 void Geometry::loadTexture(std::vector<std::string> faces)
 {
