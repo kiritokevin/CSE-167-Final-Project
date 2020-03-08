@@ -34,6 +34,8 @@ public:
     unsigned int textureID;
     glm::mat4 model;
     glm::vec3 midPoint;
+    glm::vec3 max;
+    glm::vec3 min;
     glm::mat4 view;
     glm::mat4 projection;
     std::vector<glm::vec3> points;

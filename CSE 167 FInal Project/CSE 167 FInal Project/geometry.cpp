@@ -93,8 +93,8 @@ Geometry::Geometry(std::string objFilename)
     model = glm::mat4(1);
     
     // find the max and min of x, y and z
-    glm::vec3 max = points[0];
-    glm::vec3 min = points[0];
+    max = points[0];
+    min = points[0];
     
     for(int i = 0; i < points.size(); i++)
     {
@@ -173,6 +173,12 @@ Geometry::Geometry(std::string objFilename)
     // scale up/down
     model = glm::scale(glm::mat4(1.0f), glm::vec3(scale,scale,scale)) * model;
     
+    // scale up the ball a little bit
+    model = glm::scale(glm::mat4(1.0f), glm::vec3(3.0f,3.0f,3.0f)) * model;
+    
+    // scale up the max and min after scale the model up
+    max = glm::vec3(3.0, 3.0, 3.0) * max;
+    min = glm::vec3(3.0, 3.0, 3.0) * min;
     /* triangle mesh and color */
     // Set the color.
 
@@ -233,6 +239,7 @@ Geometry::~Geometry()
 
 void Geometry::draw(GLuint shaderProgram, glm::mat4 C, glm::mat4 View, glm::mat4 Projection)
 {
+    
 //    glUseProgram(shaderProgram);
 //    GLuint modelLoc = glGetUniformLocation(shaderProgram, "model");
 //    GLuint projectionLoc = glGetUniformLocation(shaderProgram, "projection");

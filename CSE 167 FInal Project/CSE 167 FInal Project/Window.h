@@ -21,6 +21,7 @@
 #include "shader.h"
 #include "skybox.h"
 #include "geometry.h"
+#include "Cube.h"
 
 class Window
 {

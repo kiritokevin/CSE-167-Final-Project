@@ -12,9 +12,7 @@ namespace
     int leftPressed = 0;
     int rightPressed = 0;
     int controlMode = 1;
-    int positionCount = 0;
-    int frequency = 0;
-    int robotFrequency = 0;
+    int debugCollision = 1;
     
     // rotating light factor
     float degree = 0.0;
@@ -41,6 +39,7 @@ namespace
 	GLuint program; // The shader program id.
     GLuint programSphere;
     GLuint programSkybox;
+    GLuint programCube;
 	GLuint projectionLoc; // Location of projection in shader.
 
 	GLuint viewLoc; // Location of view in shader.
@@ -55,6 +54,9 @@ namespace
     
     // temp transformation matrices
 
+    
+    // boundings
+    Cube* c;
 };
 
 bool Window::initializeProgram()
@@ -88,7 +90,14 @@ bool Window::initializeProgram()
         return false;
     }
     
+    programCube = LoadShaders("shaders/cube.vert", "shaders/cube.frag");
     
+    // check
+    if(!programSphere)
+    {
+        std::cerr << "Failed to initialize skybox shader program" << std::endl;
+        return false;
+    }
 
 	// Activate the shader program.
 	glUseProgram(program);
@@ -104,7 +113,10 @@ bool Window::initializeObjects()
     // create skybox object
     sky = new skybox(5.0f, view, projection);
     sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
-	return true;
+	
+    // initialize boundings
+    c = new Cube(1.0f, sphere->min, sphere->max);
+    return true;
 }
 
 void Window::cleanUp()
@@ -210,6 +222,11 @@ void Window::displayCallback(GLFWwindow* window)
     // draw skybox
     sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
     sky -> draw(programSkybox, view);
+    if(debugCollision == 1)
+    {
+        c -> draw(programCube, view, projection);
+    };
+
     
     // Gets events, including input such as keyboard and mouse or window resizing.
     glfwPollEvents();

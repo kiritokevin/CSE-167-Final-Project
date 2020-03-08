@@ -20,6 +20,9 @@
 		2956D0CC241312D000A5F033 /* geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2956D0CA241312D000A5F033 /* geometry.cpp */; };
 		2956D0DA2413170800A5F033 /* sphere.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2956D0D0241315F900A5F033 /* sphere.frag */; };
 		2956D0DB2413170800A5F033 /* sphere.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2956D0CF241315DC00A5F033 /* sphere.vert */; };
+		2956D0DF2414739E00A5F033 /* Cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2956D0DD2414739E00A5F033 /* Cube.cpp */; };
+		2956D0E22414797900A5F033 /* cube.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2956D0E02414797900A5F033 /* cube.frag */; };
+		2956D0E32414797900A5F033 /* cube.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2956D0E12414797900A5F033 /* cube.vert */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +32,8 @@
 			dstPath = shaders;
 			dstSubfolderSpec = 16;
 			files = (
+				2956D0E22414797900A5F033 /* cube.frag in CopyFiles */,
+				2956D0E32414797900A5F033 /* cube.vert in CopyFiles */,
 				2956D0DA2413170800A5F033 /* sphere.frag in CopyFiles */,
 				2956D0DB2413170800A5F033 /* sphere.vert in CopyFiles */,
 				2956D0AF24130A8600A5F033 /* shader.frag in CopyFiles */,
@@ -76,6 +81,10 @@
 		2956D0D8241316E400A5F033 /* skybox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = skybox.vert; sourceTree = "<group>"; };
 		2956D0D9241316E400A5F033 /* sphere.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sphere.vert; sourceTree = "<group>"; };
 		2956D0DC24131DD000A5F033 /* paper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = paper.jpg; sourceTree = "<group>"; };
+		2956D0DD2414739E00A5F033 /* Cube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cube.cpp; sourceTree = "<group>"; };
+		2956D0DE2414739E00A5F033 /* Cube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cube.h; sourceTree = "<group>"; };
+		2956D0E02414797900A5F033 /* cube.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = cube.frag; path = "CSE 167 FInal Project/shaders/cube.frag"; sourceTree = "<group>"; };
+		2956D0E12414797900A5F033 /* cube.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = cube.vert; path = "CSE 167 FInal Project/shaders/cube.vert"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +103,8 @@
 		2956D07B2413065B00A5F033 = {
 			isa = PBXGroup;
 			children = (
+				2956D0E02414797900A5F033 /* cube.frag */,
+				2956D0E12414797900A5F033 /* cube.vert */,
 				2956D0D0241315F900A5F033 /* sphere.frag */,
 				2956D0CF241315DC00A5F033 /* sphere.vert */,
 				2956D0AB24130A8600A5F033 /* shader.frag */,
@@ -117,6 +128,8 @@
 		2956D0862413065B00A5F033 /* CSE 167 FInal Project */ = {
 			isa = PBXGroup;
 			children = (
+				2956D0DD2414739E00A5F033 /* Cube.cpp */,
+				2956D0DE2414739E00A5F033 /* Cube.h */,
 				2956D0D1241316E400A5F033 /* shaders */,
 				2956D0CA241312D000A5F033 /* geometry.cpp */,
 				2956D0CB241312D000A5F033 /* geometry.h */,
@@ -237,6 +250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2956D0DF2414739E00A5F033 /* Cube.cpp in Sources */,
 				2956D0C624130DB700A5F033 /* skybox.cpp in Sources */,
 				2956D0C724130DB700A5F033 /* Window.cpp in Sources */,
 				2956D0C924130DB700A5F033 /* shader.cpp in Sources */,
