@@ -12,6 +12,11 @@ namespace
     int leftPressed = 0;
     int rightPressed = 0;
     int controlMode = 1;
+    
+    // first person view on/off
+    int FPV = 0;
+    
+    // collision bounding on/off
     int debugCollision = 1;
     
     // rotating light factor
@@ -181,7 +186,7 @@ GLFWwindow* Window::createWindow(int width, int height)
 	glfwSwapInterval(0);
 	
 	// Initialize the quad that will be textured with your image
-//	// The quad must be made with the window
+	// The quad must be made with the window
     
 	// Call the resize callback to make sure things get drawn immediately.
 	Window::resizeCallback(window, width, height);
@@ -192,7 +197,7 @@ GLFWwindow* Window::createWindow(int width, int height)
 void Window::resizeCallback(GLFWwindow* window, int w, int h)
 {
 #ifdef __APPLE__
-    width = w ;
+    width = w;
     height = h;
 	// In case your Mac has a retina display.
 	glfwGetFramebufferSize(window, &width, &height);
@@ -214,19 +219,37 @@ void Window::idleCallback()
 
 void Window::displayCallback(GLFWwindow* window)
 {
-    // Switch back to using OpenGL's rasterizer
-    //glUseProgram(program);
     // Clear the color and depth buffers.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // draw skybox
-    sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
-    sky -> draw(programSkybox, view);
-    if(debugCollision == 1)
+    // FPV and TPV switch
+    if(FPV == 1)
     {
-        c -> draw(programCube, view, projection);
-    };
+        eye = sphere->midPoint;
+        view = glm::lookAt(eye, center, up);
+        
+        // draw skybox
+        sky -> draw(programSkybox, view);
+        //sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
 
+    }
+    else
+    {
+//        eye = glm::vec3(0, 10, 50);
+//        view = glm::lookAt(eye, center, up);
+        
+        // draw skybox
+        sky -> draw(programSkybox, view);
+        
+        // draw sphere
+        sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
+        
+        // draw the bounding cube
+        if(debugCollision == 1)
+        {
+            c -> draw(programCube, view, projection);
+        }
+    }
     
     // Gets events, including input such as keyboard and mouse or window resizing.
     glfwPollEvents();
@@ -243,7 +266,14 @@ void Window::mouse_button_callback(GLFWwindow *window, int button, int action, i
         // check press or release
         if(action == GLFW_PRESS)
         {
-
+            // get current cursor position
+            rightPressed = 1;
+            double xpos, ypos;
+            glfwGetCursorPos(window, &xpos, &ypos);
+            
+            // get previous mouse position on the sphere
+            prevPosition = glm::vec3(xpos,ypos,0.0f);
+            prevPositionSphere = trackingBallMapping(xpos, ypos);
         }
         else if(action == GLFW_RELEASE)
         {
@@ -255,7 +285,14 @@ void Window::mouse_button_callback(GLFWwindow *window, int button, int action, i
         // check press or release
         if(action == GLFW_PRESS)
         {
-
+            // get current cursor position
+            leftPressed = 1;
+            double xpos, ypos;
+            glfwGetCursorPos(window, &xpos, &ypos);
+            
+            // get previous
+            prevPosition = glm::vec3(xpos,ypos,0.0f);
+            prevPositionSphere = trackingBallMapping(xpos, ypos);
         }
         else if(action == GLFW_RELEASE)
         {
@@ -274,9 +311,7 @@ glm::vec3 Window::trackingBallMapping(double xpos, double ypos)
     v.z = 0.0f;
 
     d = glm::length(v);
-
     v.z = sqrtf(1.001f - d*d);
-
     v = glm::normalize(v);
 
     return v;
@@ -289,6 +324,10 @@ void Window::cursor_position_callback(GLFWwindow *window, double xpos, double yp
     glm::vec3 v = trackingBallMapping(xpos, ypos);
     glm::vec3 curr = glm::vec3(xpos, ypos, 0.0f);
     
+    if(leftPressed == 1)
+    {
+        rotateCamera(prevPositionSphere, v);
+    }
     // update previous position
     prevPosition = curr;
     prevPositionSphere = v;
@@ -407,6 +446,18 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 else
                 {
                     debugCollision = 1;
+                }
+                break;
+                    
+            // switch to FPV
+            case GLFW_KEY_V:
+                if (FPV == 0)
+                {
+                    FPV = 1;
+                }
+                else
+                {
+                    FPV = 0;
                 }
                 break;
                     
