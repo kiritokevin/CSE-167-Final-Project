@@ -296,12 +296,17 @@ void Geometry::move(int direction)
     {
         // update model
         model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,-1.0f)) * model;
+    
+        // update midpoint
+        midPoint = midPoint + glm::vec3(0.0f,0.0f,-1.0f);
     }
     // backward
     else if(direction == 1)
     {
         // update model
         model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,1.0f)) * model;
+        // update midpoint
+        midPoint = midPoint + glm::vec3(0.0f,0.0f,1.0f);
     }
     
     // left
@@ -309,6 +314,8 @@ void Geometry::move(int direction)
     {
         // update model
         model = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f,0.0f,0.0f)) * model;
+        // update midpoint
+        midPoint = midPoint + glm::vec3(-1.0f,0.0f,0.0f);
     }
     
     // right
@@ -316,6 +323,8 @@ void Geometry::move(int direction)
     {
         // update model
         model = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f,0.0f,0.0f)) * model;
+        // update midpoint
+        midPoint = midPoint + glm::vec3(1.0f,0.0f,0.0f);
     }
 }
 

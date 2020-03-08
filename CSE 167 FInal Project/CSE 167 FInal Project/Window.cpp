@@ -235,8 +235,10 @@ void Window::displayCallback(GLFWwindow* window)
     }
     else
     {
-//        eye = glm::vec3(0, 10, 50);
-//        view = glm::lookAt(eye, center, up);
+        // reset eye position
+        eye = glm::vec3(0, 10, 50);
+        //center = glm::vec3(0, 0, 0);
+        view = glm::lookAt(eye, center, up);
         
         // draw skybox
         sky -> draw(programSkybox, view);
