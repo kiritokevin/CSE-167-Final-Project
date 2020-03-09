@@ -435,6 +435,7 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
             case GLFW_KEY_A:
                 if(FPV == 1)
                 {
+                    // TODO: Not really work here
                     glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
                     direction = glm::normalize(direction);
                     sphere -> moveFPV(glm::vec3(-direction.x, 0, direction.z));
@@ -451,6 +452,7 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
             case GLFW_KEY_D:
                 if(FPV == 1)
                 {
+                    // TODO: Not really work here
                     glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
                     direction = glm::normalize(direction);
                     sphere -> moveFPV(glm::vec3(direction.x, 0, -direction.z));
