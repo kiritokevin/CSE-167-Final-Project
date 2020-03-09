@@ -179,6 +179,7 @@ Geometry::Geometry(std::string objFilename)
     // scale up the max and min after scale the model up
     max = glm::vec3(3.0, 3.0, 3.0) * max;
     min = glm::vec3(3.0, 3.0, 3.0) * min;
+    
     /* triangle mesh and color */
     // Set the color.
 
@@ -323,9 +324,20 @@ void Geometry::move(int direction)
     {
         // update model
         model = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f,0.0f,0.0f)) * model;
+        
         // update midpoint
         midPoint = midPoint + glm::vec3(1.0f,0.0f,0.0f);
     }
+}
+
+// move to a certain direction
+void Geometry::moveFPV(glm::vec3 direction)
+{
+    // update model
+    model = glm::translate(glm::mat4(1.0f), direction) * model;
+    
+    // update midpoint
+    midPoint = midPoint + direction;
 }
 
 // load texture from jpeg file

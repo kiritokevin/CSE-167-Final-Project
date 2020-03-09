@@ -12,8 +12,11 @@ namespace
     int leftPressed = 0;
     int rightPressed = 0;
     int controlMode = 1;
+        int count = 0;
     
     // first person view on/off
+    // 0: Third person view
+    // 1: First person view
     int FPV = 0;
     
     // collision bounding on/off
@@ -31,6 +34,9 @@ namespace
     // Bunny and Dragon
     skybox* sky;
 
+    // constant TPV eye posision
+    glm::vec3 TPV_angle = glm::vec3(0, 10, 50);
+    
 	glm::vec3 eye(0, 10, 50); // Camera position.
 	glm::vec3 center(0, 0, 0); // The point we are looking at.
 	glm::vec3 up(0, 1, 0); // The up direction of the camera.
@@ -214,30 +220,40 @@ void Window::resizeCallback(GLFWwindow* window, int w, int h)
 
 void Window::idleCallback()
 {
-
+    if(FPV == 1)
+    {
+        count++;
+    }
 }
 
 void Window::displayCallback(GLFWwindow* window)
 {
     // Clear the color and depth buffers.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
     // FPV and TPV switch
     if(FPV == 1)
     {
         eye = sphere->midPoint;
+        
+        // always look at world center after switching to the FPV
+        if(count == 1)
+        {
+            center = glm::vec3(0,0,0);
+        }
         view = glm::lookAt(eye, center, up);
         
         // draw skybox
         sky -> draw(programSkybox, view);
-        //sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
 
     }
     else
     {
+        count = 0;
         // reset eye position
-        eye = glm::vec3(0, 10, 50);
-        //center = glm::vec3(0, 0, 0);
+        eye = sphere -> midPoint + TPV_angle;
+        
+        // reset center position, keep looking at the ball
+        center = sphere -> midPoint;
         view = glm::lookAt(eye, center, up);
         
         // draw skybox
@@ -357,7 +373,7 @@ void Window::rotateCamera(glm::vec3 prev, glm::vec3 after)
             rotateMatrix = glm::rotate(rotateMatrix, glm::degrees(angle), rotAxis);
             // glm::mat4 model = skybox.model * rotateMatrix;
             center = glm::vec3(rotateMatrix * glm::vec4(center - eye, 0));
-            view = glm::lookAt(eye, center, up);
+            //view = glm::lookAt(eye, center, up);
         }
 }
 
@@ -417,26 +433,65 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 
             // move left
             case GLFW_KEY_A:
-                sphere -> move(2);
-                c -> move(2);
+                if(FPV == 1)
+                {
+                    glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
+                    direction = glm::normalize(direction);
+                    sphere -> moveFPV(glm::vec3(-direction.x, 0, direction.z));
+                }
+                else
+                {
+                    sphere -> move(2);
+                    c -> move(2);
+                }
+
                 break;
                     
             // move right
             case GLFW_KEY_D:
-                sphere -> move(3);
-                c -> move(3);
+                if(FPV == 1)
+                {
+                    glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
+                    direction = glm::normalize(direction);
+                    sphere -> moveFPV(glm::vec3(direction.x, 0, -direction.z));
+                }
+                else
+                {
+                    sphere -> move(3);
+                    c -> move(3);
+                }
                 break;
                     
             // forward
             case GLFW_KEY_W:
-                sphere -> move(0);
-                c -> move(0);
+                if(FPV == 1)
+                {
+                    // find the direction that the object should move
+                    glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
+                    direction = glm::normalize(direction);
+                    sphere -> moveFPV(direction);
+                }
+                else
+                {
+                    sphere -> move(0);
+                    c -> move(0);
+                }
                 break;
                     
             // backward
             case GLFW_KEY_S:
-                sphere -> move(1);
-                c -> move(1);
+                if(FPV == 1)
+                {
+                    // find the direction that the object should move
+                    glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
+                    direction = glm::normalize(direction);
+                    sphere -> moveFPV(-direction);
+                }
+                else
+                {
+                    sphere -> move(1);
+                    c -> move(1);
+                }
                 break;
                     
             // debug collision

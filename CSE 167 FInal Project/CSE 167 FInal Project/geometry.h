@@ -50,6 +50,8 @@ public:
     void update(glm::mat4 C);
     // move the ball
     void move(int direction);
+    // move the ball in FPV
+    void moveFPV(glm::vec3 direction);
     void loadTexture(std::vector<std::string> faces);
 };
 #endif /* geometry_hpp */
