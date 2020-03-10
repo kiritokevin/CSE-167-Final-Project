@@ -123,8 +123,8 @@ bool Window::initializeObjects()
 {
     // create skybox object
     sky = new skybox(5.0f, view, projection);
-    sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
-	
+    /*sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");*/
+	sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
     // initialize boundings
     c = new Cube(1.0f, sphere->min, sphere->max);
     return true;
