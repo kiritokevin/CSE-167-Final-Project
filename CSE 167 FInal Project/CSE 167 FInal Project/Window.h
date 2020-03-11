@@ -22,6 +22,7 @@
 #include "skybox.h"
 #include "geometry.h"
 #include "Cube.h"
+#include "Rec.h"
 
 class Window
 {

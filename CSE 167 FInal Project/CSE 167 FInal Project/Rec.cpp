@@ -8,7 +8,7 @@
 
 #include "Rec.h"
 
-Rec::Rec(float size, glm::vec3 min, glm::vec3 max)
+Rec::Rec(glm::vec3 start_point,float length,float height,float width)
 {
     // Model matrix. Since the original size of the cube is 2, in order to
     // have a cube of some size, we need to scale the cube by size / 2.
@@ -28,7 +28,7 @@ Rec::Rec(float size, glm::vec3 min, glm::vec3 max)
      *
      */
     // difference between the max point and min point
-    glm::vec3 diff = max - min;
+    /*glm::vec3 diff = max - min;
     
     std::vector<glm::vec3> vertices
     {
@@ -40,6 +40,17 @@ Rec::Rec(float size, glm::vec3 min, glm::vec3 max)
         glm::vec3(max.x - diff.x, max.y - diff.y, max.z - diff.z),
         glm::vec3(max.x, max.y - diff.y, max.z - diff.z),
         glm::vec3(max.x, max.y, max.z - diff.z)
+    };*/
+    std::vector<glm::vec3> vertices
+    {
+        start_point,
+        start_point+glm::vec3(0,-height,0),
+        start_point+glm::vec3(length,-height,0),
+        start_point+glm::vec3(length,0,0),
+        start_point+glm::vec3(0,0,-width),
+        start_point+glm::vec3(0,-height,-width),
+        start_point+glm::vec3(length,-height,-width),
+        start_point+glm::vec3(length,0,-width),
     };
     
      // The 8 vertices of a cube.

@@ -68,6 +68,7 @@ namespace
     
     // boundings
     Cube* c;
+    Rec* r;
 };
 
 bool Window::initializeProgram()
@@ -126,7 +127,8 @@ bool Window::initializeObjects()
     /*sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");*/
 	sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
     // initialize boundings
-    c = new Cube(1.0f, sphere->min, sphere->max);
+    //c = new Cube(1.0f, sphere->min, sphere->max);
+    r= new Rec(sphere->min+glm::vec3(0,0,20),10.0f,2.0f,15.0f);
     return true;
 }
 
@@ -265,7 +267,10 @@ void Window::displayCallback(GLFWwindow* window)
         // draw the bounding cube
         if(debugCollision == 1)
         {
-            c -> draw(programCube, view, projection);
+            //c -> draw(programCube, view, projection);
+            
+            // Test draw rectangle
+            r->draw(programCube,view,projection);
         }
     }
     

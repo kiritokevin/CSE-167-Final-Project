@@ -1,5 +1,5 @@
-#ifndef _CUBE_H_
-#define _CUBE_H_
+#ifndef _REC_H_
+#define _REC_H_
 
 #ifdef __APPLE__
 #include <OpenGL/gl3.h>
@@ -22,7 +22,8 @@ private:
     GLuint vao;
     GLuint vbos[2];
 public:
-    Rec(float size, glm::vec3 min, glm::vec3 max);
+    //Rec(float size, glm::vec3 min, glm::vec3 max);
+    Rec(glm::vec3 start_point,float length,float height,float width);
     ~Rec();
 
     void draw(GLuint shaderProgram, glm::mat4 View, glm::mat4 Projection);
