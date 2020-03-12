@@ -22,6 +22,13 @@ Cube::Cube(float size, glm::vec3 min, glm::vec3 max)
     // difference between the max point and min point
     glm::vec3 diff = max - min;
     
+    // remenber the length of the cube (x, y, z )
+    length = diff.x;
+    
+    // remember the max
+    cube_max = max;
+    
+    // assign the vertices
     std::vector<glm::vec3> vertices
     {
         glm::vec3(max.x - diff.x, max.y, max.z),

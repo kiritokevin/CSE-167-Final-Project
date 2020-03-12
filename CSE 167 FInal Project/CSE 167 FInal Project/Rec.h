@@ -23,10 +23,14 @@ private:
     GLuint vbos[2];
 public:
     //Rec(float size, glm::vec3 min, glm::vec3 max);
+    float rec_length;
+    float rec_height;
+    float rec_width;
+    glm::vec3 rec_max;
     Rec(glm::vec3 start_point,float length,float height,float width);
     ~Rec();
 
-    void draw(GLuint shaderProgram, glm::mat4 View, glm::mat4 Projection,glm::vec3 Color);
+    void draw(GLuint shaderProgram, glm::mat4 View, glm::mat4 Projection,glm::vec3 Color,bool check_collision);
     void update(int num);
     void spin(float deg);
     void move(int direction);

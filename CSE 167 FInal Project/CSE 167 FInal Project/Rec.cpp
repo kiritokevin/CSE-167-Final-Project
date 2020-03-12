@@ -41,6 +41,14 @@ Rec::Rec(glm::vec3 start_point,float length,float height,float width)
         glm::vec3(max.x, max.y - diff.y, max.z - diff.z),
         glm::vec3(max.x, max.y, max.z - diff.z)
     };*/
+    
+    // remember the length, width and height
+    rec_width = width;
+    rec_height = height;
+    rec_length = length;
+    rec_max = start_point + glm::vec3(length,0,0);
+    
+    // rec vertices information
     std::vector<glm::vec3> vertices
     {
         start_point,
@@ -126,7 +134,7 @@ Rec::~Rec()
     glDeleteVertexArrays(1, &vao);
 }
 
-void Rec::draw(GLuint shaderProgram, glm::mat4 View, glm::mat4 Projection,glm::vec3 Color)
+void Rec::draw(GLuint shaderProgram, glm::mat4 View, glm::mat4 Projection,glm::vec3 Color, bool check_collision)
 {
     glUseProgram(shaderProgram);
     GLuint projectionLoc = glGetUniformLocation(shaderProgram, "projection");
@@ -142,7 +150,15 @@ void Rec::draw(GLuint shaderProgram, glm::mat4 View, glm::mat4 Projection,glm::v
     glBindVertexArray(vao);
     // Draw triangles using the indices in the second VBO, which is an
     // elemnt array buffer.
-    glDrawElements(GL_TRIANGLES , 36, GL_UNSIGNED_INT, 0);
+    // rendering line segment when detecting collision
+    if (check_collision)
+    {
+        glDrawElements(GL_LINE_STRIP , 36, GL_UNSIGNED_INT, 0);
+    }
+    else
+    {
+        glDrawElements(GL_TRIANGLES , 36, GL_UNSIGNED_INT, 0);
+    }
     // Unbind from the VAO.
     glBindVertexArray(0);
 }

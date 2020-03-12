@@ -22,6 +22,8 @@ private:
 	GLuint vao;
 	GLuint vbos[2];
 public:
+    float length;
+    glm::vec3 cube_max;
 	Cube(float size, glm::vec3 min, glm::vec3 max);
 	~Cube();
 

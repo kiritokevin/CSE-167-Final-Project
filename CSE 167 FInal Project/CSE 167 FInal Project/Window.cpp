@@ -126,8 +126,8 @@ bool Window::initializeObjects()
 {
     // create skybox object
     sky = new skybox(5.0f, view, projection);
-    /*sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");*/
-	sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+    sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+	//sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
     // initialize boundings
     c = new Cube(1.0f, sphere->min, sphere->max);
     base= new Rec(sphere->min+glm::vec3(-22,0,20),50.0f,1.0f,60.0f);
@@ -248,6 +248,10 @@ void Window::displayCallback(GLFWwindow* window)
         
         // draw skybox
         sky -> draw(programSkybox, view);
+        
+        // draw terrain base
+        base->draw(programCube,view,projection,glm::vec3(0.67,1,0.5), true);
+
 
     }
     else
@@ -267,7 +271,7 @@ void Window::displayCallback(GLFWwindow* window)
         sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
         
         // draw terrain base
-        base->draw(programCube,view,projection,glm::vec3(0.67,1,0.5));
+        base->draw(programCube,view,projection,glm::vec3(0.67,1,0.5), true);
         
         // draw the bounding cube
         if(debugCollision == 1)
@@ -386,6 +390,20 @@ void Window::rotateCamera(glm::vec3 prev, glm::vec3 after)
 
 void Window::scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 {
+}
+
+// check collision
+bool Window::check_collision(Cube* box, Rec* building)
+{
+    // if both x, y, z overlapped, we then have a collision
+    bool collisionX = box -> cube_max.x >= building -> rec_max.x - building -> rec_length
+    && building -> rec_max.x >= box -> cube_max.x - box -> length;
+    bool collisionY = box -> cube_max.y >= building -> rec_max.y - building -> rec_height
+    && building -> rec_max.y >= box -> cube_max.y - box -> length;
+    bool collisionZ = box -> cube_max.z >= building -> rec_max.z - building -> rec_width
+    && building -> rec_max.z >= box -> cube_max.z - box -> length;
+    
+    return collisionX && collisionY && collisionZ;
 }
 
 void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
