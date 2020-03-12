@@ -56,6 +56,7 @@ namespace
 	GLuint viewLoc; // Location of view in shader.
 	GLuint modelLoc; // Location of model in shader.
     GLuint viewPosLoc; // eye position
+    GLuint colorLoc;
 
     // Geometry nodes
     Geometry* sphere;
@@ -68,7 +69,7 @@ namespace
     
     // boundings
     Cube* c;
-    Rec* r;
+    Rec* base;
 };
 
 bool Window::initializeProgram()
@@ -117,6 +118,7 @@ bool Window::initializeProgram()
 	projectionLoc = glGetUniformLocation(program, "projection");
 	viewLoc = glGetUniformLocation(program, "view");
 	modelLoc = glGetUniformLocation(program, "model");
+    colorLoc = glGetUniformLocation(program, "color");
     return true;
 }
 
@@ -127,8 +129,8 @@ bool Window::initializeObjects()
     /*sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");*/
 	sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
     // initialize boundings
-    //c = new Cube(1.0f, sphere->min, sphere->max);
-    r= new Rec(sphere->min+glm::vec3(0,0,20),10.0f,2.0f,15.0f);
+    c = new Cube(1.0f, sphere->min, sphere->max);
+    base= new Rec(sphere->min+glm::vec3(-22,0,20),50.0f,1.0f,60.0f);
     return true;
 }
 
@@ -264,13 +266,13 @@ void Window::displayCallback(GLFWwindow* window)
         // draw sphere
         sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
         
+        // draw terrain base
+        base->draw(programCube,view,projection,glm::vec3(0.67,1,0.5));
+        
         // draw the bounding cube
         if(debugCollision == 1)
         {
-            //c -> draw(programCube, view, projection);
-            
-            // Test draw rectangle
-            r->draw(programCube,view,projection);
+            c -> draw(programCube, view, projection);
         }
     }
     

@@ -270,6 +270,7 @@ void Geometry::draw(GLuint shaderProgram, glm::mat4 C, glm::mat4 View, glm::mat4
     GLuint projectionLoc = glGetUniformLocation(shaderProgram, "projection");
     GLuint viewLoc = glGetUniformLocation(shaderProgram, "view");
     GLuint modelLoc = glGetUniformLocation(shaderProgram, "model");
+    GLuint colorLoc = glGetUniformLocation(shaderProgram, "color");
     // ... set model, view, projection matrix
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(Projection));
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(View));

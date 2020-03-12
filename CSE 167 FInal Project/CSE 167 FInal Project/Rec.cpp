@@ -126,21 +126,23 @@ Rec::~Rec()
     glDeleteVertexArrays(1, &vao);
 }
 
-void Rec::draw(GLuint shaderProgram, glm::mat4 View, glm::mat4 Projection)
+void Rec::draw(GLuint shaderProgram, glm::mat4 View, glm::mat4 Projection,glm::vec3 Color)
 {
     glUseProgram(shaderProgram);
     GLuint projectionLoc = glGetUniformLocation(shaderProgram, "projection");
     GLuint viewLoc = glGetUniformLocation(shaderProgram, "view");
     GLuint modelLoc = glGetUniformLocation(shaderProgram, "model");
+    GLuint colorLoc = glGetUniformLocation(shaderProgram, "color");
     // ... set model, view, projection matrix
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(Projection));
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(View));
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+    glUniform3fv(colorLoc, 1, glm::value_ptr(Color));
     // Bind to the VAO.
     glBindVertexArray(vao);
     // Draw triangles using the indices in the second VBO, which is an
     // elemnt array buffer.
-    glDrawElements(GL_LINE_STRIP, 36, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES , 36, GL_UNSIGNED_INT, 0);
     // Unbind from the VAO.
     glBindVertexArray(0);
 }
