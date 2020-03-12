@@ -134,7 +134,7 @@ Rec::~Rec()
     glDeleteVertexArrays(1, &vao);
 }
 
-void Rec::draw(GLuint shaderProgram, glm::mat4 View, glm::mat4 Projection,glm::vec3 Color, bool check_collision)
+void Rec::draw(GLuint shaderProgram,glm::vec3 Color, bool check_collision, glm::mat4 View, glm::mat4 Projection)
 {
     glUseProgram(shaderProgram);
     GLuint projectionLoc = glGetUniformLocation(shaderProgram, "projection");

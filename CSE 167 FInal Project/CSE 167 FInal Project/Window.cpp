@@ -250,7 +250,7 @@ void Window::displayCallback(GLFWwindow* window)
         sky -> draw(programSkybox, view);
         
         // draw terrain base
-        base->draw(programCube,view,projection,glm::vec3(0.67,1,0.5), true);
+        base->draw(programCube,glm::vec3(0.67,1,0.5), true ,view,projection);
 
 
     }
@@ -271,7 +271,7 @@ void Window::displayCallback(GLFWwindow* window)
         sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
         
         // draw terrain base
-        base->draw(programCube,view,projection,glm::vec3(0.67,1,0.5), true);
+        base->draw(programCube,glm::vec3(0.67,1,0.5), true,view,projection);
         
         // draw the bounding cube
         if(debugCollision == 1)

@@ -74,7 +74,7 @@ public:
     static void cursor_position_callback(GLFWwindow* window,
     double xpos, double ypos);
     static glm::vec3 trackingBallMapping(double xpos, double ypos);
-    static bool check_collision(Geometry* sphere, Rec* building);
+    static bool check_collision(Cube* cube, Rec* building);
 };
 
 #endif

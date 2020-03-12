@@ -30,7 +30,7 @@ public:
     Rec(glm::vec3 start_point,float length,float height,float width);
     ~Rec();
 
-    void draw(GLuint shaderProgram, glm::mat4 View, glm::mat4 Projection,glm::vec3 Color,bool check_collision);
+    void draw(GLuint shaderProgram, glm::vec3 Color, bool check_collision, glm::mat4 View, glm::mat4 Projection);
     void update(int num);
     void spin(float deg);
     void move(int direction);
