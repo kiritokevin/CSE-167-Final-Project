@@ -113,16 +113,21 @@ namespace
 
 void Window::initialize_roadmap()
 {
-    // choose the intersections (only find three in this case)
+    // choose the intersections (only find two in this case)
     int count = 0;
-    while(count < 3)
+    while(count < 2)
     {
+        // TODO: Some problems with random generator
         // select seed based on system time
         srand(time(0));
         
         // some random number
-        int row = rand() % 6;
-        int col = rand() % 6;
+        int row = rand() % 8;
+        
+        srand(13);
+        int col = rand() % 8;
+        
+        // std::cout << row << " " << col << std::endl;
         
         // check whether current position is valid
         // if valid set it to intersection and assign
@@ -134,8 +139,38 @@ void Window::initialize_roadmap()
             // assign road (row) and road (col)
             for(int i = 0; i < 8; i++)
             {
-                roadmap[row][i] = 2;
-                roadmap[i][col] = 3;
+                if(i != col)
+                {
+                    // if not intersection
+                    if(roadmap[row][i] != 1)
+                    {
+                        // add a intersection if current position is 3 previously
+                        if(roadmap[row][i] == 3)
+                        {
+                            roadmap[row][i] = 1;
+                        }
+                        else
+                        {
+                            roadmap[row][i] = 2;
+                        }
+                    }
+                }
+                if(i != row)
+                {
+                    // if not intersection
+                    if(roadmap[i][col] != 1)
+                    {
+                        // add a intersection if current position is 2 previously
+                        if(roadmap[i][col] == 2)
+                        {
+                            roadmap[i][col] = 1;
+                        }
+                        else
+                        {
+                            roadmap[i][col] = 3;
+                        }
+                    }
+                }
             }
 
             // increase counter
@@ -159,6 +194,16 @@ void Window::initialize_roadmap()
     
     // two blocks' court
     
+    // print out the road
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            // print the number
+            std::cout << roadmap[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
 }
 
 bool Window::initializeProgram()
@@ -220,6 +265,9 @@ bool Window::initializeObjects()
     // initialize boundings
     c = new Cube(1.0f, sphere->min, sphere->max);
     base= new Rec(sphere->min+glm::vec3(-22,0,20),50.0f,1.0f,60.0f);
+    
+    // initialize road map
+    initialize_roadmap();
     return true;
 }
 
@@ -541,8 +589,22 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 break;
             case GLFW_KEY_F3:
                 break;
-                    
+            
+            // re-calculate the roadmap
             case GLFW_KEY_N:
+                // clean the old road map
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        // empty position
+                        roadmap[i][j] = 0;
+                    }
+                }
+                std::cout << std::endl;
+                    
+                // initalize again
+                initialize_roadmap();
                 break;
                 
             // move left

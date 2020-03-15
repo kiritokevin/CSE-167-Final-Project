@@ -38,14 +38,14 @@ skybox::skybox(float size, glm::mat4 View, glm::mat4 Projection)
      // The 8 vertices of a cube.
     std::vector<glm::vec3> vertices
     {
-        glm::vec3(-200, 200, 200),
-        glm::vec3(-200, -200, 200),
-        glm::vec3(200, -200, 200),
-        glm::vec3(200, 200, 200),
-        glm::vec3(-200, 200, -200),
-        glm::vec3(-200, -200, -200),
-        glm::vec3(200, -200, -200),
-        glm::vec3(200, 200, -200)
+        glm::vec3(-500, 500, 500),
+        glm::vec3(-500, -500, 500),
+        glm::vec3(500, -500, 500),
+        glm::vec3(500, 500, 500),
+        glm::vec3(-500, 500, -500),
+        glm::vec3(-500, -500, -500),
+        glm::vec3(500, -500, -500),
+        glm::vec3(500, 500, -500)
     };
 
     // Each ivec3(v1, v2, v3) define a triangle consists of vertices v1, v2
