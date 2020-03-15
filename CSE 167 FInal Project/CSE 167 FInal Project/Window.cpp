@@ -88,9 +88,25 @@ namespace
 //
 //    5. update city
 //    1: redo the initialization (based on some key press)
-    
+    // initialize road map 2D array
+    int roadmap [8][8] = {{0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0}
+    };
     
 };
+
+// initialize the roadmap to build the city
+void Window::initialize_roadmap()
+{
+    // find the intersections
+    
+}
 
 bool Window::initializeProgram()
 {

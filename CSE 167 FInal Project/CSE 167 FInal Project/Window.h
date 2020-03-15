@@ -16,6 +16,8 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <stdlib.h>
+#include <time.h> 
 
 #include "Object.h"
 #include "shader.h"
@@ -75,6 +77,9 @@ public:
     double xpos, double ypos);
     static glm::vec3 trackingBallMapping(double xpos, double ypos);
     static bool check_collision(Cube* cube, Rec* building);
+    
+    // initialize road map
+    static void initialize_roadmap();
 };
 
 #endif
