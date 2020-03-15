@@ -72,7 +72,7 @@ namespace
     Rec* base;
     
     // Roadmap:
-    randomize: https://www.geeksforgeeks.org/rand-and-srand-in-ccpp/
+    //randomize: https://www.geeksforgeeks.org/rand-and-srand-in-ccpp/
 //    1. a 2D arrary to store the city map
 //    2. initialize the roadmap (initializeRoadmap)
 //
