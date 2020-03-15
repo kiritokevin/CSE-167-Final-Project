@@ -146,8 +146,8 @@ bool Window::initializeObjects()
 {
     // create skybox object
     sky = new skybox(5.0f, view, projection);
-    /*sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");*/
-	sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+    sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+	//sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
     // initialize boundings
     c = new Cube(1.0f, sphere->min, sphere->max);
     base= new Rec(sphere->min+glm::vec3(-22,0,20),50.0f,1.0f,60.0f);
@@ -264,7 +264,7 @@ void Window::displayCallback(GLFWwindow* window)
         {
             center = glm::vec3(0,0,0);
         }
-        view = glm::lookAt(eye, center, up);
+        view = glm::lookAt(eye, eye + center, up);
         
         // draw skybox
         sky -> draw(programSkybox, view);
@@ -482,8 +482,8 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 {
                     // TODO: Not really work here
                     glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
-                    direction = glm::normalize(direction);
-                    sphere -> moveFPV(glm::vec3(-direction.x, 0, direction.z));
+                    direction = glm::normalize(glm::cross(direction, up));
+                    sphere -> moveFPV(glm::vec3(-direction.x, 0, -direction.z));
                 }
                 else
                 {
@@ -499,8 +499,8 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 {
                     // TODO: Not really work here
                     glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
-                    direction = glm::normalize(direction);
-                    sphere -> moveFPV(glm::vec3(direction.x, 0, -direction.z));
+                    direction = glm::normalize(glm::cross(direction, up));
+                    sphere -> moveFPV(glm::vec3(direction.x, 0, direction.z));
                 }
                 else
                 {

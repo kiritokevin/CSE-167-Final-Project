@@ -25,6 +25,7 @@
 		2956D0E32414797900A5F033 /* cube.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2956D0E12414797900A5F033 /* cube.vert */; };
 		2956D0E52415F8BC00A5F033 /* shadow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2956D0E42415F8BC00A5F033 /* shadow.cpp */; };
 		2956D0EC241A03B100A5F033 /* Rec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2956D0EA241A03B100A5F033 /* Rec.cpp */; };
+		2956D0F0241B25B300A5F033 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2956D0ED241B25B200A5F033 /* Transform.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -91,6 +92,9 @@
 		2956D0E62415F8E400A5F033 /* shadow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shadow.h; sourceTree = "<group>"; };
 		2956D0EA241A03B100A5F033 /* Rec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rec.cpp; sourceTree = "<group>"; };
 		2956D0EB241A03B100A5F033 /* Rec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rec.h; sourceTree = "<group>"; };
+		2956D0ED241B25B200A5F033 /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
+		2956D0EE241B25B200A5F033 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		2956D0EF241B25B200A5F033 /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +138,9 @@
 		2956D0862413065B00A5F033 /* CSE 167 FInal Project */ = {
 			isa = PBXGroup;
 			children = (
+				2956D0EE241B25B200A5F033 /* Node.h */,
+				2956D0ED241B25B200A5F033 /* Transform.cpp */,
+				2956D0EF241B25B200A5F033 /* Transform.h */,
 				2956D0EA241A03B100A5F033 /* Rec.cpp */,
 				2956D0EB241A03B100A5F033 /* Rec.h */,
 				2956D0DD2414739E00A5F033 /* Cube.cpp */,
@@ -260,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2956D0F0241B25B300A5F033 /* Transform.cpp in Sources */,
 				2956D0DF2414739E00A5F033 /* Cube.cpp in Sources */,
 				2956D0E52415F8BC00A5F033 /* shadow.cpp in Sources */,
 				2956D0EC241A03B100A5F033 /* Rec.cpp in Sources */,
