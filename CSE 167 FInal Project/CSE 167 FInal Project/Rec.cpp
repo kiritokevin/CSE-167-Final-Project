@@ -60,19 +60,6 @@ Rec::Rec(glm::vec3 start_point,float length,float height,float width)
         start_point+glm::vec3(length,-height,-width),
         start_point+glm::vec3(length,0,-width),
     };
-    
-     // The 8 vertices of a cube.
-//    std::vector<glm::vec3> vertices
-//    {
-//        glm::vec3(-1, 1, 1),
-//        glm::vec3(-1, -1, 1),
-//        glm::vec3(1, -1, 1),
-//        glm::vec3(1, 1, 1),
-//        glm::vec3(-1, 1, -1),
-//        glm::vec3(-1, -1, -1),
-//        glm::vec3(1, -1, -1),
-//        glm::vec3(1, 1, -1)
-//    };
 
     // Each ivec3(v1, v2, v3) define a triangle consists of vertices v1, v2
     // and v3 in counter-clockwise order.
@@ -163,46 +150,46 @@ void Rec::draw(GLuint shaderProgram,glm::vec3 Color, bool check_collision, glm::
     glBindVertexArray(0);
 }
 
-void Rec::update(int num)
-{
-    // Spin the cube by 1 degree.
-//    spin(0.1f);
-}
+//void Rec::update(int num)
+//{
+//    // Spin the cube by 1 degree.
+////    spin(0.1f);
+//}
 
-void Rec::spin(float deg)
-{
-    // Update the model matrix by multiplying a rotation matrix
-//    model = glm::rotate(glm::mat4(1), glm::radians(deg),
-//        glm::vec3(0.0f, 1.0f, 0.0f)) * model;
-}
-
-void Rec::move(int direction)
-{
-    // forward
-    if(direction == 0)
-    {
-        // update model
-        model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,-1.0f)) * model;
-    }
-    // backward
-    else if(direction == 1)
-    {
-        // update model
-        model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,1.0f)) * model;
-    }
-    
-    // left
-    else if(direction == 2)
-    {
-        // update model
-        model = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f,0.0f,0.0f)) * model;
-    }
-    
-    // right
-    else
-    {
-        // update model
-        model = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f,0.0f,0.0f)) * model;
-    }
-}
+//void Rec::spin(float deg)
+//{
+//    // Update the model matrix by multiplying a rotation matrix
+////    model = glm::rotate(glm::mat4(1), glm::radians(deg),
+////        glm::vec3(0.0f, 1.0f, 0.0f)) * model;
+//}
+//
+//void Rec::move(int direction)
+//{
+//    // forward
+//    if(direction == 0)
+//    {
+//        // update model
+//        model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,-1.0f)) * model;
+//    }
+//    // backward
+//    else if(direction == 1)
+//    {
+//        // update model
+//        model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,1.0f)) * model;
+//    }
+//
+//    // left
+//    else if(direction == 2)
+//    {
+//        // update model
+//        model = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f,0.0f,0.0f)) * model;
+//    }
+//
+//    // right
+//    else
+//    {
+//        // update model
+//        model = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f,0.0f,0.0f)) * model;
+//    }
+//}
 
