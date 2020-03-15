@@ -70,6 +70,26 @@ namespace
     // boundings
     Cube* c;
     Rec* base;
+    
+    // Roadmap:
+    randomize: https://www.geeksforgeeks.org/rand-and-srand-in-ccpp/
+//    1. a 2D arrary to store the city map
+//    2. initialize the roadmap (initializeRoadmap)
+//
+//    3.
+//    1: randomize intersections
+//    2: build roads
+//    3: randomize buildings
+//    4: randomize one point; check the surrounding; build court
+//
+//    4. draw the city
+//    1: displayCallBack: run through the city map
+//    2: draw the block based on the number in roadmap
+//
+//    5. update city
+//    1: redo the initialization (based on some key press)
+    
+    
 };
 
 bool Window::initializeProgram()
@@ -126,8 +146,8 @@ bool Window::initializeObjects()
 {
     // create skybox object
     sky = new skybox(5.0f, view, projection);
-    sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
-	//sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+    /*sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");*/
+	sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
     // initialize boundings
     c = new Cube(1.0f, sphere->min, sphere->max);
     base= new Rec(sphere->min+glm::vec3(-22,0,20),50.0f,1.0f,60.0f);
