@@ -89,7 +89,8 @@ namespace
 //    5. update city
 //    1: redo the initialization (based on some key press)
     // initialize road map 2D array
-    int roadmap [8][8] = {{0,0,0,0,0,0,0,0},
+    int roadmap [8][8] = {
+        {0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0},
@@ -102,9 +103,61 @@ namespace
 };
 
 // initialize the roadmap to build the city
+// we have six kinds of blocks
+// intersection, road(row), road(column) and three different types of building.
+// 1: intersection.
+// 2: road(row)
+// 3: road(column)
+// 4,5,6: different types of building
+// 7: baskerball court
+
 void Window::initialize_roadmap()
 {
-    // find the intersections
+    // choose the intersections (only find three in this case)
+    int count = 0;
+    while(count < 3)
+    {
+        // select seed based on system time
+        srand(time(0));
+        
+        // some random number
+        int row = rand() % 6;
+        int col = rand() % 6;
+        
+        // check whether current position is valid
+        // if valid set it to intersection and assign
+        if(roadmap[row][col] == 0 || roadmap[row][col] == 2 || roadmap[row][col] == 3)
+        {
+            // assign intersection
+            roadmap[row][col] = 1;
+            
+            // assign road (row) and road (col)
+            for(int i = 0; i < 8; i++)
+            {
+                roadmap[row][i] = 2;
+                roadmap[i][col] = 3;
+            }
+
+            // increase counter
+            count += 1;
+        }
+    }
+    
+    // go through the loop and assign to the other building
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            // empty position
+            if(roadmap[i][j] == 0)
+            {
+                // 4 ~ 6
+                roadmap[i][j] = rand() % 3 + 4;
+            }
+        }
+    }
+    
+    // two blocks' court
     
 }
 
