@@ -71,7 +71,7 @@ namespace
     Cube* c;
     Rec* base;
     Rec* buildingA;
-    
+    std::vector<Rec*> rec_list;
     // Roadmap:
     //randomize: https://www.geeksforgeeks.org/rand-and-srand-in-ccpp/
 //    1. a 2D arrary to store the city map
@@ -261,8 +261,8 @@ bool Window::initializeObjects()
 {
     // create skybox object
     sky = new skybox(5.0f, view, projection);
-    sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
-	//sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+    //sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+	sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
     
     // initialize boundings
     c = new Cube(1.0f, sphere->min, sphere->max);
@@ -270,7 +270,16 @@ bool Window::initializeObjects()
     // initialize different types of buildings (and roads)
     buildingA = new Rec(sphere -> min + glm::vec3(-22,0,20), 10.0f, 80.0f, 10.0f);
     //base= new Rec(sphere->min+glm::vec3(-22,0,20),50.0f,1.0f,60.0f);
+    glm::vec3 starting_point = sphere->min+glm::vec3(-8,0,20);
     
+    // initialize the grid
+    /*for(int i = 0;i<8;i++){
+        for(int j = 0;j<8;j++){
+            glm::vec3 current_point = glm::vec3(starting_point[0]+2*i,0,starting_point[2]+2*j);
+            Rec* new_rec = new Rec(current_point,2,1,2);
+            rec_list.push_back(new_rec);
+        }
+    }*/
     // initialize road map
     initialize_roadmap();
     return true;
@@ -415,6 +424,11 @@ void Window::displayCallback(GLFWwindow* window)
         
         // draw sphere
         sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
+        
+        // draw base
+        /*for(int i = 0;i<rec_list.size();i++){
+            rec_list[i]->draw(programCube, glm::vec3(0.67,1,0.5), false, view, projection);
+        }*/
         
         // draw the bounding cube
         if(debugCollision)
