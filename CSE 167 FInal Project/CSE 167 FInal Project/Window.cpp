@@ -728,8 +728,21 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     // TODO: Not really work here
                     glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
                     direction = glm::normalize(glm::cross(direction, up));
-                    sphere -> moveFPV(glm::vec3(-direction.x, 0, -direction.z));
                     c -> moveFPV(glm::vec3(-direction.x, 0, -direction.z));
+                    
+                    // check collision when move
+                    collision_detected = global_collision_check();
+                    
+                    // if collision, move back cube and do nothing with sphere
+                    if(collision_detected)
+                    {
+                        c -> moveFPV(glm::vec3(direction.x, 0, direction.z));
+                    }
+                    else
+                    {
+                        sphere -> moveFPV(glm::vec3(-direction.x, 0, -direction.z));
+                    }
+                    
                 }
                 else
                 {
@@ -760,8 +773,20 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     // TODO: Not really work here
                     glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
                     direction = glm::normalize(glm::cross(direction, up));
-                    sphere -> moveFPV(glm::vec3(direction.x, 0, direction.z));
                     c -> moveFPV(glm::vec3(direction.x, 0, direction.z));
+                    
+                    // check collision when move
+                    collision_detected = global_collision_check();
+                    
+                    // if collision, move back cube and do nothing with sphere
+                    if(collision_detected)
+                    {
+                        c -> moveFPV(glm::vec3(-direction.x, 0, -direction.z));
+                    }
+                    else
+                    {
+                        sphere -> moveFPV(glm::vec3(direction.x, 0, direction.z));
+                    }
                 }
                 else
                 {
@@ -783,16 +808,26 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     
             // forward
             case GLFW_KEY_W:
-                    
-                
-                    
                 if(FPV == 1)
                 {
                     // find the direction that the object should move
                     glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
                     direction = glm::normalize(direction);
-                    sphere -> moveFPV(direction);
                     c -> moveFPV(direction);
+                    
+                    // check collision when move
+                    collision_detected = global_collision_check();
+                    
+                    // if collision, move back cube and do nothing with sphere
+                    if(collision_detected)
+                    {
+                        c -> moveFPV(-direction);
+                    }
+                    else
+                    {
+                        sphere -> moveFPV(direction);
+                    }
+                    
                 }
                 else
                 {
@@ -821,8 +856,22 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     // find the direction that the object should move
                     glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
                     direction = glm::normalize(direction);
-                    sphere -> moveFPV(-direction);
                     c -> moveFPV(-direction);
+                    
+                    // check collision when move
+                    collision_detected = global_collision_check();
+                    
+                    // if collision, move back cube and do nothing with sphere
+                    if(collision_detected)
+                    {
+                        c -> moveFPV(direction);
+                    }
+                    else
+                    {
+                        sphere -> moveFPV(-direction);
+                    }
+                    
+                    
                 }
                 else
                 {
