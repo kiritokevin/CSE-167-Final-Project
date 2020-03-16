@@ -5,5 +5,11 @@
 ### S: Go backward
 ### A: Go left
 ### D: Go right
-### V: change view
+### UP: Go forward (camera position)
+### DOWN: Go backward (camera position)
+### LEFT: Go left (camera position)
+### RIGHT: Go right (camera position)
+### V: First Person View On/Off
+### T: Third Person View On/Off
+### F1: Move camera
 ### C: collision bounding
