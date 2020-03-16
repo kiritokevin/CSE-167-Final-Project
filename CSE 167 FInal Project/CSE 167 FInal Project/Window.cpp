@@ -261,8 +261,8 @@ bool Window::initializeObjects()
 {
     // create skybox object
     sky = new skybox(5.0f, view, projection);
-    sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
-	//sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+    //sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+	sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
     
     // initialize boundings
     c = new Cube(1.0f, sphere->min, sphere->max);
@@ -270,18 +270,10 @@ bool Window::initializeObjects()
     // initialize different types of buildings (and roads)
     buildingA = new Rec(sphere -> min + glm::vec3(-22,0,20), 10.0f, 80.0f, 10.0f);
     //base= new Rec(sphere->min+glm::vec3(-22,0,20),50.0f,1.0f,60.0f);
-    glm::vec3 starting_point = sphere->min+glm::vec3(-8,0,20);
     
-    // initialize the grid
-    /*for(int i = 0;i<8;i++){
-        for(int j = 0;j<8;j++){
-            glm::vec3 current_point = glm::vec3(starting_point[0]+2*i,0,starting_point[2]+2*j);
-            Rec* new_rec = new Rec(current_point,2,1,2);
-            rec_list.push_back(new_rec);
-        }
-    }*/
     // initialize road map
     initialize_roadmap();
+    
     return true;
 }
 
@@ -387,7 +379,41 @@ void Window::idleCallback()
 //    2: draw the block based on the number in roadmap
 void Window::drawCity()
 {
-    buildingA ->draw(programCube, glm::vec3(0.67,1,0.5), debugCollision, view, projection);
+    if(rec_list.size()!=0){
+        for(int x = 0; x<rec_list.size();x++){
+            delete rec_list[x];
+        }
+        rec_list={};
+    }
+     glm::vec3 starting_point = sphere->min+glm::vec3(-8,0,20);
+    //buildingA ->draw(programCube, glm::vec3(0.67,1,0.5), debugCollision, view, projection);
+    for(int i = 0;i<8;i++){
+        for(int j = 0;j<8;j++){
+            glm::vec3 current_point = glm::vec3(starting_point[0]+2*i,0,starting_point[2]+2*j);
+            Rec* new_rec;
+            glm::vec3 block_color;
+            if(roadmap[i][j]==4){
+                new_rec = new Rec(current_point,2,-3,2);
+            }
+            else if(roadmap[i][j]==5){
+                new_rec = new Rec(current_point,2,-6,2);
+            }
+            else if(roadmap[i][j]==6){
+                new_rec = new Rec(current_point,2,-9,2);
+            }
+            else{
+                new_rec = new Rec(current_point,2,-1,2);
+            }
+            if(roadmap[i][j]==1||roadmap[i][j]==2||roadmap[i][j]==3){
+                block_color = glm::vec3(0.39,0.35,0.35);
+            }
+            else{
+                block_color = glm::vec3(0.67,1,0.5);
+            }
+            new_rec->draw(programCube,block_color, debugCollision,view,projection);
+            rec_list.push_back(new_rec);
+        }
+    }
 }
 
 void Window::displayCallback(GLFWwindow* window)
