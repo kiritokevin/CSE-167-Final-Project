@@ -12,8 +12,9 @@ namespace
     int leftPressed = 0;
     int rightPressed = 0;
     int controlMode = 1;
-        int count = 0;
-    
+    int freeCamera = 0;
+    int FPVcount = 0;
+    int FreeCameraCount = 0;
     // first person view on/off
     // 0: Third person view
     // 1: First person view
@@ -377,7 +378,12 @@ void Window::idleCallback()
 {
     if(FPV == 1)
     {
-        count++;
+        FPVcount++;
+    }
+    
+    if(freeCamera == 1)
+    {
+        FreeCameraCount++;
     }
 }
 
@@ -394,24 +400,45 @@ void Window::displayCallback(GLFWwindow* window)
 {
     // Clear the color and depth buffers.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    // FPV and TPV switch
-    if(FPV == 1)
+    
+    // free camera, FPV and TPV switch
+    if(freeCamera == 1)
     {
+        FPVcount = 0;
+        if(FreeCameraCount == 1)
+        {
+            eye = glm::vec3(0, 10, 50);
+        }
+        view = glm::lookAt(eye, eye + center, up);
+        
+        // draw sphere
+        sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
+        
+        // draw the bounding cube
+        if(debugCollision)
+        {
+            c -> draw(programCube, view, projection);
+        }
+
+    }
+    
+    else if(FPV == 1)
+    {
+        FreeCameraCount = 0;
         eye = sphere->midPoint;
         
         // always look at world center after switching to the FPV
-        if(count == 1)
+        if(FPVcount == 1)
         {
             center = glm::vec3(0,0,0);
         }
         view = glm::lookAt(eye, eye + center, up);
         
-        // draw skybox
-        sky -> draw(programSkybox, view);
     }
     else
     {
-        count = 0;
+        FreeCameraCount = 0;
+        FPVcount = 0;
         // reset eye position
         eye = sphere -> midPoint + TPV_angle;
         
@@ -419,8 +446,7 @@ void Window::displayCallback(GLFWwindow* window)
         center = sphere -> midPoint;
         view = glm::lookAt(eye, center, up);
         
-        // draw skybox
-        sky -> draw(programSkybox, view);
+
         
         // draw sphere
         sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
@@ -436,6 +462,8 @@ void Window::displayCallback(GLFWwindow* window)
             c -> draw(programCube, view, projection);
         }
     }
+    // draw skybox
+    sky -> draw(programSkybox, view);
     
     // draw city
     drawCity();
@@ -604,9 +632,19 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 break;
             case GLFW_KEY_0:
                 break;
-                    
+            
+            // free view
             case GLFW_KEY_F1:
+                if(freeCamera == 0)
+                {
+                    freeCamera = 1;
+                }
+                else
+                {
+                    freeCamera = 0;
+                }
                 break;
+                    
             case GLFW_KEY_F2:
 
                 break;
@@ -696,6 +734,40 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 {
                     sphere -> move(1);
                     c -> move(1);
+                }
+                break;
+            
+            // move the camera freely with direction keys
+            case GLFW_KEY_UP:
+                if(freeCamera == 1)
+                {
+                    glm::vec3 direction = center - eye;
+                    direction = glm::normalize(direction);
+                    eye = eye + direction;
+                }
+                break;
+            case GLFW_KEY_DOWN:
+                if(freeCamera == 1)
+                {
+                    glm::vec3 direction = center - eye;
+                    direction = glm::normalize(direction);
+                    eye = eye - direction;
+                }
+                break;
+            case GLFW_KEY_LEFT:
+                if(freeCamera == 1)
+                {
+                    glm::vec3 direction = center - eye;
+                    direction = glm::normalize(glm::cross(direction, up));
+                    eye = eye - direction;
+                }
+                break;
+            case GLFW_KEY_RIGHT:
+                if(freeCamera == 1)
+                {
+                    glm::vec3 direction = center - eye;
+                    direction = glm::normalize(glm::cross(direction, up));
+                    eye = eye + direction;
                 }
                 break;
                     
