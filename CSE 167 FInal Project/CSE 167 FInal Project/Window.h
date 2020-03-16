@@ -76,13 +76,18 @@ public:
     static void cursor_position_callback(GLFWwindow* window,
     double xpos, double ypos);
     static glm::vec3 trackingBallMapping(double xpos, double ypos);
+    
+    // collision check and its helper
     static bool check_collision(Cube* cube, Rec* building);
+    static bool global_collision_check();
     
     // initialize road map
     static void initialize_roadmap();
     
     // draw the city
     static void drawCity();
+    
+    
 };
 
 #endif

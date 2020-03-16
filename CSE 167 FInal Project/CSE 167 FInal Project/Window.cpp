@@ -27,6 +27,9 @@ namespace
     // collision bounding on/off
     bool debugCollision = false;
     
+    // collision detected
+    bool collision_detected = false;
+    
     // rotating light factor
     float degree = 0.0;
     glm::vec3 prevPositionSphere = glm::vec3(1.0f);
@@ -76,7 +79,13 @@ namespace
     Cube* c;
     Rec* base;
     Rec* buildingA;
+    
+    // building list
     std::vector<Rec*> rec_list;
+    
+    // collision list: store the index of the collided building
+    std::vector<int> collision_list = {};
+    
     // Roadmap:
     //randomize: https://www.geeksforgeeks.org/rand-and-srand-in-ccpp/
 //    1. a 2D arrary to store the city map
@@ -273,8 +282,8 @@ bool Window::initializeObjects()
     c = new Cube(1.0f, sphere->min, sphere->max);
     
     // initialize different types of buildings (and roads)
-    buildingA = new Rec(sphere -> min + glm::vec3(-22,0,20), 10.0f, 80.0f, 10.0f);
-    //base= new Rec(sphere->min+glm::vec3(-22,0,20),50.0f,1.0f,60.0f);
+    // buildingA = new Rec(sphere -> min + glm::vec3(-22,0,20), 10.0f, 80.0f, 10.0f);
+    // base= new Rec(sphere->min+glm::vec3(-22,0,20),50.0f,1.0f,60.0f);
     
     // initialize road map
     initialize_roadmap();
@@ -420,7 +429,7 @@ void Window::drawCity()
             else{
                 block_color = glm::vec3(0.67,1,0.5);
             }
-            new_rec->draw(programCube,block_color, debugCollision,view,projection);
+            new_rec->draw(programCube,block_color, debugCollision ,view ,projection);
             rec_list.push_back(new_rec);
         }
     }
@@ -610,7 +619,7 @@ void Window::scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 {
 }
 
-// check collision
+// check collision between cube and one specific building
 bool Window::check_collision(Cube* box, Rec* building)
 {
     // if both x, y, z overlapped, we then have a collision
@@ -623,6 +632,32 @@ bool Window::check_collision(Cube* box, Rec* building)
     
     return collisionX && collisionY && collisionZ;
 }
+
+// loop through all building and check collision for each of them
+bool Window::global_collision_check()
+{
+    bool collision = false;
+    // loop through all building we currently have
+    for(int x = 0; x < rec_list.size();x++)
+    {
+        // check the collision with the building and the bounding box of sphere
+        // continue to the next round if there is no collision
+        
+        // collision
+        if(check_collision(c, rec_list[x]))
+        {
+            // record the index of rec_list to change the bounding box color
+            collision_list.push_back(x);
+            collision = true;
+        }
+        
+        // no collision
+    }
+    
+    // return the result
+    return collision;
+}
+
 
 void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -698,14 +733,28 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 }
                 else
                 {
-                    sphere -> move(2);
+                    // move the cube first
                     c -> move(2);
+                    
+                    // check collision when move
+                    collision_detected = global_collision_check();
+                    
+                    // if collision, move back cube and do nothing with sphere
+                    if(collision_detected)
+                    {
+                        c -> move(3);
+                    }
+                    else
+                    {
+                        sphere -> move(2);
+                    }
                 }
 
                 break;
                     
             // move right
             case GLFW_KEY_D:
+                    
                 if(FPV == 1)
                 {
                     // TODO: Not really work here
@@ -716,13 +765,27 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 }
                 else
                 {
-                    sphere -> move(3);
                     c -> move(3);
+                    // check collision when move
+                    collision_detected = global_collision_check();
+                    
+                    // if collision, move back cube and do nothing with sphere
+                    if(collision_detected)
+                    {
+                        c -> move(2);
+                    }
+                    else
+                    {
+                        sphere -> move(3);
+                    }
                 }
                 break;
                     
             // forward
             case GLFW_KEY_W:
+                    
+                
+                    
                 if(FPV == 1)
                 {
                     // find the direction that the object should move
@@ -733,13 +796,26 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 }
                 else
                 {
-                    sphere -> move(0);
+                    // check collision first
                     c -> move(0);
+                    // check collision when move
+                    collision_detected = global_collision_check();
+                    
+                    // if collision, move back cube and do nothing with sphere
+                    if(collision_detected)
+                    {
+                        c -> move(1);
+                    }
+                    else
+                    {
+                        sphere -> move(0);
+                    }
                 }
                 break;
                     
             // backward
             case GLFW_KEY_S:
+                    
                 if(FPV == 1)
                 {
                     // find the direction that the object should move
@@ -750,8 +826,21 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 }
                 else
                 {
-                    sphere -> move(1);
+                    // move the cube first
                     c -> move(1);
+                    // check collision when move
+                    collision_detected = global_collision_check();
+                    
+                    // if collision, move back cube and do nothing with sphere
+                    if(collision_detected)
+                    {
+                        c -> move(0);
+                    }
+                    else
+                    // no collision
+                    {
+                        sphere -> move(1);
+                    }
                 }
                 break;
             

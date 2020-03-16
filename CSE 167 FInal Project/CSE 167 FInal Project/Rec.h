@@ -30,6 +30,7 @@ public:
     float rec_width;
     unsigned int textureID;
     glm::vec3 rec_max;
+    glm::vec3 rec_color;
     Rec(glm::vec3 start_point,float length,float height,float width);
     ~Rec();
 

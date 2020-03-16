@@ -24,6 +24,7 @@ private:
 public:
     float length;
     glm::vec3 cube_max;
+    glm::vec3 cube_color;
 	Cube(float size, glm::vec3 min, glm::vec3 max);
 	~Cube();
 
