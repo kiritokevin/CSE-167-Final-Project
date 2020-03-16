@@ -14,11 +14,15 @@ namespace
     int controlMode = 1;
     int freeCamera = 0;
     int FPVcount = 0;
+    
+    // free camera view on/off
     int FreeCameraCount = 0;
+    
     // first person view on/off
-    // 0: Third person view
-    // 1: First person view
     int FPV = 0;
+    
+    // third person view on/off
+    int TPV = 0;
     
     // collision bounding on/off
     bool debugCollision = false;
@@ -262,8 +266,8 @@ bool Window::initializeObjects()
 {
     // create skybox object
     sky = new skybox(5.0f, view, projection);
-    //sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
-	sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+    sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+	//sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
     
     // initialize boundings
     c = new Cube(1.0f, sphere->min, sphere->max);
@@ -461,7 +465,7 @@ void Window::displayCallback(GLFWwindow* window)
         view = glm::lookAt(eye, eye + center, up);
         
     }
-    else
+    else if(TPV = 1)
     {
         FreeCameraCount = 0;
         FPVcount = 0;
@@ -658,18 +662,6 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 break;
             case GLFW_KEY_0:
                 break;
-            
-            // free view
-            case GLFW_KEY_F1:
-                if(freeCamera == 0)
-                {
-                    freeCamera = 1;
-                }
-                else
-                {
-                    freeCamera = 0;
-                }
-                break;
                     
             case GLFW_KEY_F2:
 
@@ -809,15 +801,51 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                 }
                 break;
                     
+            // free view
+            case GLFW_KEY_F1:
+                if(freeCamera == 0)
+                {
+                    freeCamera = 1;
+                    FPV = 0;
+                    TPV = 0;
+                }
+                else
+                {
+                    freeCamera = 0;
+                    FPV = 0;
+                    TPV = 1;
+                }
+                break;
+                    
             // switch to FPV
             case GLFW_KEY_V:
                 if (FPV == 0)
                 {
                     FPV = 1;
+                    TPV = 0;
+                    freeCamera = 0;
                 }
                 else
                 {
                     FPV = 0;
+                    freeCamera = 0;
+                    TPV = 1;
+                }
+                break;
+                    
+            // switch to TPV
+            case GLFW_KEY_T:
+                if(TPV == 0)
+                {
+                    TPV = 1;
+                    FPV = 0;
+                    freeCamera = 0;
+                }
+                else
+                {
+                    TPV = 0;
+                    FPV = 0;
+                    freeCamera = 1;
                 }
                 break;
                     
