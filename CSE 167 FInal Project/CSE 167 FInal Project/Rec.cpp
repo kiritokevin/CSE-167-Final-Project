@@ -7,6 +7,11 @@
 //
 
 #include "Rec.h"
+#include <stdio.h>
+#ifndef STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_IMPLEMENTATION
+#endif
+
 
 Rec::Rec(glm::vec3 start_point,float length,float height,float width)
 {
@@ -150,46 +155,35 @@ void Rec::draw(GLuint shaderProgram,glm::vec3 Color, bool check_collision, glm::
     glBindVertexArray(0);
 }
 
-//void Rec::update(int num)
-//{
-//    // Spin the cube by 1 degree.
-////    spin(0.1f);
-//}
+// load the texture
+void Rec::loadTexture(std::vector<std::string> faces)
+{
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
-//void Rec::spin(float deg)
-//{
-//    // Update the model matrix by multiplying a rotation matrix
-////    model = glm::rotate(glm::mat4(1), glm::radians(deg),
-////        glm::vec3(0.0f, 1.0f, 0.0f)) * model;
-//}
-//
-//void Rec::move(int direction)
-//{
-//    // forward
-//    if(direction == 0)
-//    {
-//        // update model
-//        model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,-1.0f)) * model;
-//    }
-//    // backward
-//    else if(direction == 1)
-//    {
-//        // update model
-//        model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,1.0f)) * model;
-//    }
-//
-//    // left
-//    else if(direction == 2)
-//    {
-//        // update model
-//        model = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f,0.0f,0.0f)) * model;
-//    }
-//
-//    // right
-//    else
-//    {
-//        // update model
-//        model = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f,0.0f,0.0f)) * model;
-//    }
-//}
+    int width, height, nrChannels;
+    for (unsigned int i = 0; i < faces.size(); i++)
+    {
+        unsigned char *data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
+        if (data)
+        {
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
+                        0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data
+            );
+            stbi_image_free(data);
+        }
+        else
+        {
+            std::cout << "Cubemap texture failed to load at path: " << faces[i] << std::endl;
+            stbi_image_free(data);
+        }
+    }
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+}
+
+
 

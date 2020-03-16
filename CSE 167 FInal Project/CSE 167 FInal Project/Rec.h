@@ -12,7 +12,9 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
-
+#include <iostream>
+#include <string>
+#include "stb_image.h"
 #include "Object.h"
 
 class Rec
@@ -26,14 +28,13 @@ public:
     float rec_length;
     float rec_height;
     float rec_width;
+    unsigned int textureID;
     glm::vec3 rec_max;
     Rec(glm::vec3 start_point,float length,float height,float width);
     ~Rec();
 
     void draw(GLuint shaderProgram, glm::vec3 Color, bool check_collision, glm::mat4 View, glm::mat4 Projection);
-    void update(int num);
-    void spin(float deg);
-    void move(int direction);
+    void loadTexture(std::vector<std::string> faces);
 };
 
 #endif
