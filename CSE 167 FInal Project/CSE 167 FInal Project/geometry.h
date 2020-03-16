@@ -42,8 +42,21 @@ public:
     std::vector<glm::vec3> normal;
     std::vector<glm::ivec3> faces;
     std::vector<std::string> textureName = {
-        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/skybox/base.jpg"
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/skybox/stone.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/skybox/stone.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/skybox/stone.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/skybox/stone.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/skybox/stone.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/skybox/stone.jpg"
     };
+//    std::vector<std::string> textureName = {
+//        "/Users/KZ/Desktop/CSE 167/CSE 167 HW 0/CSE 167 HW 0/skybox/right.jpg",
+//        "/Users/KZ/Desktop/CSE 167/CSE 167 HW 0/CSE 167 HW 0/skybox/right.jpg",
+//        "/Users/KZ/Desktop/CSE 167/CSE 167 HW 0/CSE 167 HW 0/skybox/right.jpg",
+//        "/Users/KZ/Desktop/CSE 167/CSE 167 HW 0/CSE 167 HW 0/skybox/right.jpg",
+//        "/Users/KZ/Desktop/CSE 167/CSE 167 HW 0/CSE 167 HW 0/skybox/right.jpg",
+//        "/Users/KZ/Desktop/CSE 167/CSE 167 HW 0/CSE 167 HW 0/skybox/right.jpg"
+//    };
     Geometry(std::string objFilename);
     ~Geometry();
     void draw(GLuint shaderProgram, glm::mat4 View, glm::mat4 Projection, glm::mat4 C);

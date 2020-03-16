@@ -664,6 +664,7 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
                     direction = glm::normalize(glm::cross(direction, up));
                     sphere -> moveFPV(glm::vec3(-direction.x, 0, -direction.z));
+                    c -> moveFPV(glm::vec3(-direction.x, 0, -direction.z));
                 }
                 else
                 {
@@ -681,6 +682,7 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
                     direction = glm::normalize(glm::cross(direction, up));
                     sphere -> moveFPV(glm::vec3(direction.x, 0, direction.z));
+                    c -> moveFPV(glm::vec3(direction.x, 0, direction.z));
                 }
                 else
                 {
@@ -697,6 +699,7 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
                     direction = glm::normalize(direction);
                     sphere -> moveFPV(direction);
+                    c -> moveFPV(direction);
                 }
                 else
                 {
@@ -713,6 +716,7 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     glm::vec3 direction = glm::vec3((center.x - sphere -> midPoint.x), 0.0f, (center.z - sphere -> midPoint.z));
                     direction = glm::normalize(direction);
                     sphere -> moveFPV(-direction);
+                    c -> moveFPV(-direction);
                 }
                 else
                 {

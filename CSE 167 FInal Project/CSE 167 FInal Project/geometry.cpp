@@ -241,9 +241,8 @@ Geometry::~Geometry()
 void Geometry::draw(GLuint shaderProgram, glm::mat4 C, glm::mat4 View, glm::mat4 Projection)
 {
     // choose skybox shader
-    // TODO: fix texture mapping
     glUseProgram(shaderProgram);
-    glUniform1i(glGetUniformLocation(shaderProgram, "Sphere"), 0);
+    glUniform1i(glGetUniformLocation(shaderProgram, "Sphere"), 1);
     //glDepthFunc(GL_LEQUAL);
 
     // get location of all matrices
@@ -259,8 +258,8 @@ void Geometry::draw(GLuint shaderProgram, glm::mat4 C, glm::mat4 View, glm::mat4
     // glFrontFace(GL_CW);
 
     glBindVertexArray(vao);
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textureID);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
     glDrawElements(GL_TRIANGLES, faces.size() * 3, GL_UNSIGNED_INT, 0);
     // Unbind from the VAO.
     glBindVertexArray(0);
@@ -325,7 +324,7 @@ void Geometry::moveFPV(glm::vec3 direction)
 void Geometry::loadTexture(std::vector<std::string> faces)
 {
     glGenTextures(1, &textureID);
-    glBindTexture(GL_TEXTURE_2D, textureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
     int width, height, nrChannels;
     for (unsigned int i = 0; i < faces.size(); i++)
@@ -333,7 +332,7 @@ void Geometry::loadTexture(std::vector<std::string> faces)
         unsigned char *data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
         if (data)
         {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data
             );
             stbi_image_free(data);
         }
@@ -343,9 +342,9 @@ void Geometry::loadTexture(std::vector<std::string> faces)
             stbi_image_free(data);
         }
     }
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 }
