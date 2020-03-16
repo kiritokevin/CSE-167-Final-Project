@@ -17,7 +17,7 @@
 #include <string>
 #include <memory>
 #include <stdlib.h>
-#include <time.h> 
+#include <time.h>
 
 #include "Object.h"
 #include "shader.h"
@@ -80,6 +80,9 @@ public:
     
     // initialize road map
     static void initialize_roadmap();
+    
+    // draw the city
+    static void drawCity();
 };
 
 #endif

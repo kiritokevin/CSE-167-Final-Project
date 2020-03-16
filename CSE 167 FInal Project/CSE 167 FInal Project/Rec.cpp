@@ -32,21 +32,6 @@ Rec::Rec(glm::vec3 start_point,float length,float height,float width)
      *  1----2
      *
      */
-    // difference between the max point and min point
-    /*glm::vec3 diff = max - min;
-    
-    std::vector<glm::vec3> vertices
-    {
-        glm::vec3(max.x - diff.x, max.y, max.z),
-        glm::vec3(max.x - diff.x, max.y - diff.y, max.z),
-        glm::vec3(max.x, max.y - diff.y, max.z),
-        glm::vec3(max.x, max.y, max.z),
-        glm::vec3(max.x - diff.x, max.y, max.z - diff.z),
-        glm::vec3(max.x - diff.x, max.y - diff.y, max.z - diff.z),
-        glm::vec3(max.x, max.y - diff.y, max.z - diff.z),
-        glm::vec3(max.x, max.y, max.z - diff.z)
-    };*/
-    
     // remember the length, width and height
     rec_width = width;
     rec_height = height;

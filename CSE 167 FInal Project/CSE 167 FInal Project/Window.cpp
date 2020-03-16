@@ -20,7 +20,7 @@ namespace
     int FPV = 0;
     
     // collision bounding on/off
-    int debugCollision = 1;
+    bool debugCollision = false;
     
     // rotating light factor
     float degree = 0.0;
@@ -70,6 +70,7 @@ namespace
     // boundings
     Cube* c;
     Rec* base;
+    Rec* buildingA;
     
     // Roadmap:
     //randomize: https://www.geeksforgeeks.org/rand-and-srand-in-ccpp/
@@ -262,9 +263,13 @@ bool Window::initializeObjects()
     sky = new skybox(5.0f, view, projection);
     sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
 	//sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+    
     // initialize boundings
     c = new Cube(1.0f, sphere->min, sphere->max);
-    base= new Rec(sphere->min+glm::vec3(-22,0,20),50.0f,1.0f,60.0f);
+    
+    // initialize different types of buildings (and roads)
+    buildingA = new Rec(sphere -> min + glm::vec3(-22,0,20), 10.0f, 80.0f, 10.0f);
+    //base= new Rec(sphere->min+glm::vec3(-22,0,20),50.0f,1.0f,60.0f);
     
     // initialize road map
     initialize_roadmap();
@@ -367,6 +372,15 @@ void Window::idleCallback()
     }
 }
 
+// draw the city
+//    4. draw the city
+//    1: run through the city map
+//    2: draw the block based on the number in roadmap
+void Window::drawCity()
+{
+    buildingA ->draw(programCube, glm::vec3(0.67,1,0.5), debugCollision, view, projection);
+}
+
 void Window::displayCallback(GLFWwindow* window)
 {
     // Clear the color and depth buffers.
@@ -385,11 +399,6 @@ void Window::displayCallback(GLFWwindow* window)
         
         // draw skybox
         sky -> draw(programSkybox, view);
-        
-        // draw terrain base
-        base->draw(programCube,glm::vec3(0.67,1,0.5), true ,view,projection);
-
-
     }
     else
     {
@@ -407,15 +416,15 @@ void Window::displayCallback(GLFWwindow* window)
         // draw sphere
         sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
         
-        // draw terrain base
-        base->draw(programCube,glm::vec3(0.67,1,0.5), true,view,projection);
-        
         // draw the bounding cube
-        if(debugCollision == 1)
+        if(debugCollision)
         {
             c -> draw(programCube, view, projection);
         }
     }
+    
+    // draw city
+    drawCity();
     
     // Gets events, including input such as keyboard and mouse or window resizing.
     glfwPollEvents();
@@ -674,13 +683,13 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     
             // debug collision
             case GLFW_KEY_C:
-                if(debugCollision == 1)
+                if(debugCollision)
                 {
-                    debugCollision = 0;
+                    debugCollision = false;
                 }
                 else
                 {
-                    debugCollision = 1;
+                    debugCollision = true;
                 }
                 break;
                     
