@@ -102,6 +102,9 @@ skybox::skybox(float size, glm::mat4 View, glm::mat4 Projection)
     
     // get the textureID information
     loadTexture(textureName);
+    
+    // initalize cloud texture
+    cloud = new Cloud();
 }
 
 skybox::~skybox()
@@ -113,9 +116,16 @@ skybox::~skybox()
 
 void skybox::draw(GLuint glProgram, glm::mat4 View)
 {
+    
+    // setup cloud texture first
+    cloud -> draw(glProgram);
+    
     // choose skybox shader
     glUseProgram(glProgram);
     glUniform1i(glGetUniformLocation(glProgram, "Skybox"), 0);
+    
+    // set the sampler for cloud texture
+    glUniform1i(glGetUniformLocation(glProgram, "Cloud"), 1);
     glDepthFunc(GL_LEQUAL);
     
     // get location of all matrices
@@ -130,9 +140,18 @@ void skybox::draw(GLuint glProgram, glm::mat4 View)
     glFrontFace(GL_CW);
 
     glBindVertexArray(vao);
+    
+    // bind to skybox texture
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+    
+    // bind to cloud texture
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, cloud->textureID);
+    
+    // draw the element
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+    
     // Unbind from the VAO.
     glBindVertexArray(0);
     glDepthFunc(GL_LESS);

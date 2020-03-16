@@ -240,26 +240,6 @@ Geometry::~Geometry()
 
 void Geometry::draw(GLuint shaderProgram, glm::mat4 C, glm::mat4 View, glm::mat4 Projection)
 {
-    
-//    glUseProgram(shaderProgram);
-//    GLuint modelLoc = glGetUniformLocation(shaderProgram, "model");
-//    GLuint projectionLoc = glGetUniformLocation(shaderProgram, "projection");
-//    GLuint viewLoc = glGetUniformLocation(shaderProgram, "view");
-//
-//    // Bind to the VAO.
-//    glBindVertexArray(vao);
-//
-//    // set up model, view and projection matrix for drawing
-//    glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(Projection));
-//    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(View));
-//    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(C * model));
-//
-//    // instead drawing points, we draw triangle here
-//    glDrawElements(GL_TRIANGLES, faces.size() * 3, GL_UNSIGNED_INT, 0);
-//
-//    // Unbind from the VAO.
-//    glBindVertexArray(0);
-    
     // choose skybox shader
     // TODO: fix texture mapping
     glUseProgram(shaderProgram);

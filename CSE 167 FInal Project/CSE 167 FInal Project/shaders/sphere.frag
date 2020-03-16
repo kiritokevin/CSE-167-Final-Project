@@ -10,6 +10,7 @@ in vec3 TexCoords;
 
 uniform samplerCube Sphere;
 
+
 void main()
 {
     Color = texture(Sphere, TexCoords);

@@ -9,9 +9,10 @@ out vec4 FragColor;
 in vec3 TexCoords;
 
 uniform samplerCube Skybox;
+uniform sampler2D Cloud;
 
 void main()
 {
-    FragColor = texture(Skybox, TexCoords);
+    FragColor = mix(texture(Skybox, TexCoords), texture(Cloud, vec2(TexCoords.x, TexCoords.y)), 1);
 }
 
