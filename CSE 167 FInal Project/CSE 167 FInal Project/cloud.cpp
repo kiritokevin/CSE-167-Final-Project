@@ -148,7 +148,7 @@ void Cloud::draw(GLuint shaderProgram)
             texture.at((i + (j * 256)) * 4 + 1) = color;
             texture.at((i + (j * 256)) * 4 + 2) = color;
             texture.at((i + (j * 256)) * 4 + 3) = 0;
-            std::cout << color << std::endl;
+            //std::cout << color << std::endl;
         }
     }
     

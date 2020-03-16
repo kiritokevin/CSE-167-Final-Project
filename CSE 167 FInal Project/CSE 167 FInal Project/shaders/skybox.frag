@@ -13,6 +13,6 @@ uniform sampler2D Cloud;
 
 void main()
 {
-    FragColor = mix(texture(Skybox, TexCoords), texture(Cloud, vec2(TexCoords.x, TexCoords.y)), 1);
+    FragColor = mix(texture(Skybox, TexCoords), texture(Cloud, vec2(TexCoords.x, TexCoords.y)), 0);
 }
 
