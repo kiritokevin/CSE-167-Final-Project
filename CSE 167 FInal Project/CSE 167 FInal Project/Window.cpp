@@ -125,7 +125,7 @@ void Window::initialize_roadmap()
         // some random number
         int row = rand() % 8;
         
-        srand(13);
+        //srand(13);
         int col = rand() % 8;
         
         // std::cout << row << " " << col << std::endl;
@@ -241,7 +241,7 @@ bool Window::initializeProgram()
     programCube = LoadShaders("shaders/cube.vert", "shaders/cube.frag");
     
     // check
-    if(!programSphere)
+    if(!programCube)
     {
         std::cerr << "Failed to initialize skybox shader program" << std::endl;
         return false;
