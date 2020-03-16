@@ -155,12 +155,19 @@ void Cube::move(int direction)
     {
         // update model
         model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,-1.0f)) * model;
+        
+        // update max
+        cube_max = cube_max + glm::vec3(0.0f,0.0f,-1.0f);
     }
+    
     // backward
     else if(direction == 1)
     {
         // update model
         model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,1.0f)) * model;
+        
+        // update max
+        cube_max = cube_max + glm::vec3(0.0f,0.0f,1.0f);
     }
     
     // left
@@ -168,6 +175,9 @@ void Cube::move(int direction)
     {
         // update model
         model = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f,0.0f,0.0f)) * model;
+        
+        // update max
+        cube_max = cube_max + glm::vec3(-1.0f,0.0f,0.0f);
     }
     
     // right
@@ -175,5 +185,19 @@ void Cube::move(int direction)
     {
         // update model
         model = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f,0.0f,0.0f)) * model;
+        
+        // update max
+        cube_max = cube_max + glm::vec3(1.0f,0.0f,0.0f);
     }
+    
+}
+
+// move to a certain direction
+void Cube::moveFPV(glm::vec3 direction)
+{
+    // update model
+    model = glm::translate(glm::mat4(1.0f), direction) * model;
+    
+    // update midpoint
+    cube_max = cube_max + direction;
 }

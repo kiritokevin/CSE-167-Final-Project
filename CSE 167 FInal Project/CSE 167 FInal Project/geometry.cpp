@@ -241,7 +241,6 @@ Geometry::~Geometry()
 void Geometry::draw(GLuint shaderProgram, glm::mat4 C, glm::mat4 View, glm::mat4 Projection)
 {
     // choose skybox shader
-    // TODO: fix texture mapping
     glUseProgram(shaderProgram);
     glUniform1i(glGetUniformLocation(shaderProgram, "Sphere"), 1);
     //glDepthFunc(GL_LEQUAL);

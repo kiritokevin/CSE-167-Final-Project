@@ -31,6 +31,7 @@ public:
 	void update(int num);
 	void spin(float deg);
     void move(int direction);
+    void moveFPV(glm::vec3 direction);
 };
 
 #endif
