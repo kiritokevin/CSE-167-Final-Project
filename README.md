@@ -11,5 +11,6 @@
 ### RIGHT: Go right (camera position)
 ### V: First Person View On/Off
 ### T: Third Person View On/Off
-### F1: Move camera
+### F1: Move camera (Fly in the world space)
+### N: Generate a new city roadmap
 ### C: collision bounding
