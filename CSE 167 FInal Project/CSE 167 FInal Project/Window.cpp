@@ -22,7 +22,7 @@ namespace
     int FPV = 0;
     
     // third person view on/off
-    int TPV = 0;
+    int TPV = 1;
     
     // collision bounding on/off
     bool debugCollision = false;
@@ -59,7 +59,9 @@ namespace
     GLuint programSphere;
     GLuint programSkybox;
     GLuint programCube;
+    GLuint programCloud;
 	GLuint projectionLoc; // Location of projection in shader.
+    
 
 	GLuint viewLoc; // Location of view in shader.
 	GLuint modelLoc; // Location of model in shader.
@@ -68,10 +70,7 @@ namespace
 
     // Geometry nodes
     Geometry* sphere;
-    
-    // transform nodes
 
-    
     // temp transformation matrices
 
     
@@ -79,6 +78,7 @@ namespace
     Cube* c;
     Rec* base;
     Rec* buildingA;
+    Cloud* cloud;
     
     // building list
     std::vector<Rec*> rec_list;
@@ -268,6 +268,15 @@ bool Window::initializeProgram()
         std::cerr << "Failed to initialize skybox shader program" << std::endl;
         return false;
     }
+    
+    programCloud = LoadShaders("shaders/cloud.vert", "shaders/cloud.frag");
+    
+    // check
+    if(!programCloud)
+    {
+        std::cerr << "Failed to initialize skybox shader program" << std::endl;
+        return false;
+    }
 
 	// Activate the shader program.
 	glUseProgram(program);
@@ -285,13 +294,16 @@ bool Window::initializeObjects()
     sky = new skybox(5.0f, view, projection);
     sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
 	//sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
-    
+        
     // initialize boundings
     c = new Cube(1.0f, sphere->min, sphere->max);
     
     // initialize different types of buildings (and roads)
     // buildingA = new Rec(sphere -> min + glm::vec3(-22,0,20), 10.0f, 80.0f, 10.0f);
     // base= new Rec(sphere->min+glm::vec3(-22,0,20),50.0f,1.0f,60.0f);
+    
+    // intialize cloud
+    cloud = new Cloud();
     
     // initialize road map
     initialize_roadmap();
@@ -504,7 +516,7 @@ void Window::displayCallback(GLFWwindow* window)
         view = glm::lookAt(eye, eye + center, up);
         
     }
-    else if(TPV = 1)
+    else if(TPV == 1)
     {
         FreeCameraCount = 0;
         FPVcount = 0;
@@ -515,15 +527,10 @@ void Window::displayCallback(GLFWwindow* window)
         center = sphere -> midPoint;
         view = glm::lookAt(eye, center, up);
         
-
-        
         // draw sphere
         sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
         
-        // draw base
-        /*for(int i = 0;i<rec_list.size();i++){
-            rec_list[i]->draw(programCube, glm::vec3(0.67,1,0.5), false, view, projection);
-        }*/
+
         
         // draw the bounding cube
         if(debugCollision)
@@ -543,8 +550,13 @@ void Window::displayCallback(GLFWwindow* window)
             }
         }
     }
+    // draw cloud
+    cloud -> draw(programCloud, view, projection);
     // draw skybox
     sky -> draw(programSkybox, view);
+    
+
+    
     
     // draw city
     drawCity();

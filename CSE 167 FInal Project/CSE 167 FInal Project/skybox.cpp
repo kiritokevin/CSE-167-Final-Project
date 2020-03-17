@@ -104,7 +104,7 @@ skybox::skybox(float size, glm::mat4 View, glm::mat4 Projection)
     loadTexture(textureName);
     
     // initalize cloud texture
-    cloud = new Cloud();
+    //cloud = new Cloud();
 }
 
 skybox::~skybox()
@@ -118,7 +118,7 @@ void skybox::draw(GLuint glProgram, glm::mat4 View)
 {
     
     // setup cloud texture first
-    cloud -> draw(glProgram);
+    //cloud -> draw(glProgram);
     
     // choose skybox shader
     glUseProgram(glProgram);
@@ -147,7 +147,7 @@ void skybox::draw(GLuint glProgram, glm::mat4 View)
     
     // bind to cloud texture
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, cloud->textureID);
+    //glBindTexture(GL_TEXTURE_2D, cloud->textureID);
     
     // draw the element
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);

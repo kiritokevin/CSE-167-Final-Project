@@ -25,6 +25,7 @@
 #include "geometry.h"
 #include "Cube.h"
 #include "Rec.h"
+#include "cloud.h"
 
 class Window
 {
