@@ -79,6 +79,17 @@ namespace
     Cube* c;
     Rec* base;
     Rec* buildingA;
+    Rec* temp;
+    glm::vec3 starting_point;
+    
+    std::vector<std::string> building1 = {
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
+    };
     
     // building list
     std::vector<Rec*> rec_list;
@@ -283,8 +294,8 @@ bool Window::initializeObjects()
 {
     // create skybox object
     sky = new skybox(5.0f, view, projection);
-    sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
-	//sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+    //sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+	sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
     
     // initialize boundings
     c = new Cube(1.0f, sphere->min, sphere->max);
@@ -296,6 +307,10 @@ bool Window::initializeObjects()
     // initialize road map
     initialize_roadmap();
     
+    // initilize the starting point of the city
+    starting_point = sphere->min+glm::vec3(-8,-10,20);
+    
+    temp = new Rec(starting_point,17,20,17,building1);
     return true;
 }
 
@@ -406,7 +421,8 @@ void Window::idleCallback()
 //    2: draw the block based on the number in roadmap
 void Window::drawCity()
 {
-    if(rec_list.size()!=0){
+    temp->draw(programSphere,glm::vec3(1,1,1), debugCollision ,view ,projection);
+    /*if(rec_list.size()!=0){
         for(int x = 0; x<rec_list.size();x++){
             delete rec_list[x];
         }
@@ -450,7 +466,7 @@ void Window::drawCity()
             new_rec->draw(programCube,block_color, debugCollision ,view ,projection);
             rec_list.push_back(new_rec);
         }
-    }
+    }*/
 }
 
 void Window::displayCallback(GLFWwindow* window)

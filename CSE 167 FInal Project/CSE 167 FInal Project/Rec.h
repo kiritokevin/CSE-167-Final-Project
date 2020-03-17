@@ -31,9 +31,9 @@ public:
     unsigned int textureID;
     glm::vec3 rec_max;
     glm::vec3 rec_color;
-    Rec(glm::vec3 start_point,float length,float height,float width);
+    std::vector <std::string> textureName;
+    Rec(glm::vec3 start_point,float length,float height,float width,std::vector<std::string> texture_list);
     ~Rec();
-
     void draw(GLuint shaderProgram, glm::vec3 Color, bool check_collision, glm::mat4 View, glm::mat4 Projection);
     void loadTexture(std::vector<std::string> faces);
 };
