@@ -14,7 +14,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
-#include "cloud.h"
+//#include "cloud.h"
 
 
 class skybox
@@ -29,6 +29,10 @@ public:
     glm::mat4 model;
     Cloud* cloud;
     /*std::vector<std::string> textureName = {
+=======
+    //Cloud* cloud;
+    std::vector<std::string> textureName = {
+>>>>>>> 847eb85e299e091a28e7a948bc118cbe89eb5305
         "/Users/KZ/Desktop/CSE 167/CSE 167 HW 0/CSE 167 HW 0/skybox/right.jpg",
         "/Users/KZ/Desktop/CSE 167/CSE 167 HW 0/CSE 167 HW 0/skybox/left.jpg",
         "/Users/KZ/Desktop/CSE 167/CSE 167 HW 0/CSE 167 HW 0/skybox/top.jpg",

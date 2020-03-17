@@ -12,42 +12,21 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
-#include <iostream>
-#include <string>
-#include <math.h>
-#include "stb_image.h"
-#include "Object.h"
 
+#include "Object.h"
 
 class Cloud
 {
-public:
+private:
+    glm::mat4 model;
     GLuint vao;
-    GLuint vbos[2];
-    
-    float map32[32 * 32];
-    float map256[256 * 256];
-    
-    unsigned int textureID;
-    
-    // constructor
+    GLuint vbo;
+public:
     Cloud();
     ~Cloud();
-    void draw(GLuint shaderProgram);
-    float noise(int x, int y, int random);
-    
-    // assign color to noise map
-    void setupNoise(float* map);
-    
-    // smooth
-    float interpolate(float x, float y, float* map);
-    
-    // adjust frequency
-    void octave(float* map32, float* map256);
-    
-    // filter the cloud
-    void filter(float* map);
-    
+
+    void draw(GLuint shaderProgram, glm::mat4 View, glm::mat4 Projection);
 };
 
 #endif
+
