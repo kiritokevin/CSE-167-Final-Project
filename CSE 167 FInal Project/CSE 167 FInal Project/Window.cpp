@@ -130,11 +130,14 @@ void Window::initialize_roadmap()
 {
     // choose the intersections (only find two in this case)
     int count = 0;
-    while(count < 2)
+    int previousRow = 0;
+    int previousCol = 0;
+    srand(time(0));
+    while(count < 3)
     {
         // TODO: Some problems with random generator
         // select seed based on system time
-        srand(time(0));
+        
         
         // some random number
         int row = rand() % 8;
@@ -143,7 +146,8 @@ void Window::initialize_roadmap()
         int col = rand() % 8;
         
         // std::cout << row << " " << col << std::endl;
-        
+        // re-random the row and col if it is adjacent to previous row and col
+
         // check whether current position is valid
         // if valid set it to intersection and assign
         if(roadmap[row][col] == 0 || roadmap[row][col] == 2 || roadmap[row][col] == 3)
@@ -190,6 +194,10 @@ void Window::initialize_roadmap()
 
             // increase counter
             count += 1;
+            
+            // record previous results of random number
+            previousRow = row;
+            previousCol = col;
         }
     }
     
