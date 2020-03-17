@@ -13,7 +13,7 @@
 #endif
 
 
-Rec::Rec(glm::vec3 start_point,float length,float height,float width)
+Rec::Rec(glm::vec3 start_point,float length,float height,float width,std::vector<std::string> texture_list)
 {
     // Model matrix. Since the original size of the cube is 2, in order to
     // have a cube of some size, we need to scale the cube by size / 2.
@@ -102,6 +102,7 @@ Rec::Rec(glm::vec3 start_point,float length,float height,float width)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     // Unbind from the VAO.
     glBindVertexArray(0);
+    loadTexture(texture_list);
 }
 
 Rec::~Rec()
@@ -114,6 +115,7 @@ Rec::~Rec()
 void Rec::draw(GLuint shaderProgram,glm::vec3 Color, bool check_collision, glm::mat4 View, glm::mat4 Projection)
 {
     glUseProgram(shaderProgram);
+    glUniform1i(glGetUniformLocation(shaderProgram, "Sphere"), 1);
     GLuint projectionLoc = glGetUniformLocation(shaderProgram, "projection");
     GLuint viewLoc = glGetUniformLocation(shaderProgram, "view");
     GLuint modelLoc = glGetUniformLocation(shaderProgram, "model");
@@ -127,9 +129,11 @@ void Rec::draw(GLuint shaderProgram,glm::vec3 Color, bool check_collision, glm::
     
     // Bind to the VAO.
     glBindVertexArray(vao);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
     
     // Draw triangles using the indices in the second VBO, which is an
-    // elemnt array buffer.
+    // element array buffer.
     // rendering line segment when detecting collision
     if (check_collision)
     {
@@ -148,16 +152,13 @@ void Rec::loadTexture(std::vector<std::string> faces)
 {
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
-
     int width, height, nrChannels;
     for (unsigned int i = 0; i < faces.size(); i++)
     {
         unsigned char *data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
         if (data)
         {
-            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
-                        0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data
-            );
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
             stbi_image_free(data);
         }
         else
@@ -168,9 +169,10 @@ void Rec::loadTexture(std::vector<std::string> faces)
     }
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    //glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    //glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    //glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 }
 
 
