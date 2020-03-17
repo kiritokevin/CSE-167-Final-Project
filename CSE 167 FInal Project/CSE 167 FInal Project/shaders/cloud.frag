@@ -6,9 +6,9 @@ in vec3 pos;
   uniform float cirrus = 0.4;
   uniform float cumulus = 0.8;
 
-  const float Br = 0.0025;
+  const float Br = 0.0005;
   const float Bm = 0.0003;
-  const float g =  0.9800;
+  const float g =  0.9200;
   const vec3 nitrogen = vec3(0.650, 0.570, 0.475);
   const vec3 Kr = Br / pow(nitrogen, vec3(4.0));
   const vec3 Km = Bm / pow(nitrogen, vec3(0.84));
