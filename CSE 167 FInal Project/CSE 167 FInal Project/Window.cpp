@@ -412,22 +412,32 @@ void Window::drawCity()
             Rec* new_rec;
             glm::vec3 block_color;
             if(roadmap[i][j]==4){
-                new_rec = new Rec(current_point,2,-3,2);
+                new_rec = new Rec(current_point,2,3,2);
             }
             else if(roadmap[i][j]==5){
-                new_rec = new Rec(current_point,2,-6,2);
+                new_rec = new Rec(current_point,2,6,2);
             }
             else if(roadmap[i][j]==6){
-                new_rec = new Rec(current_point,2,-9,2);
+                new_rec = new Rec(current_point,2,9,2);
             }
             else{
-                new_rec = new Rec(current_point,2,-1,2);
+                new_rec = new Rec(current_point,2,1,2);
             }
             if(roadmap[i][j]==1||roadmap[i][j]==2||roadmap[i][j]==3){
                 block_color = glm::vec3(0.39,0.35,0.35);
             }
             else{
                 block_color = glm::vec3(0.67,1,0.5);
+            }
+            
+            // change color if collision detected
+            for(int k = 0; k < collision_list.size(); k++)
+            {
+                // if current building is under collision, change the color to red
+                if(i * 8 + j == collision_list[k])
+                {
+                    block_color = glm::vec3(1.0,0,0);
+                }
             }
             new_rec->draw(programCube,block_color, debugCollision ,view ,projection);
             rec_list.push_back(new_rec);
@@ -456,7 +466,19 @@ void Window::displayCallback(GLFWwindow* window)
         // draw the bounding cube
         if(debugCollision)
         {
-            c -> draw(programCube, view, projection);
+            // if collision detected, draw cube with red
+            if(collision_detected)
+            {
+                c -> cube_color = glm::vec3(1,0,0);
+                c -> draw(programCube, view, projection);
+            }
+            
+            // draw white in the other situation
+            else
+            {
+                c -> cube_color = glm::vec3(1,1,1);
+                c -> draw(programCube, view, projection);
+            }
         }
 
     }
@@ -498,7 +520,19 @@ void Window::displayCallback(GLFWwindow* window)
         // draw the bounding cube
         if(debugCollision)
         {
-            c -> draw(programCube, view, projection);
+            // if collision detected, draw cube with red
+            if(collision_detected)
+            {
+                c -> cube_color = glm::vec3(1,0,0);
+                c -> draw(programCube, view, projection);
+            }
+            
+            // draw white in the other situation
+            else
+            {
+                c -> cube_color = glm::vec3(1,1,1);
+                c -> draw(programCube, view, projection);
+            }
         }
     }
     // draw skybox
@@ -506,7 +540,7 @@ void Window::displayCallback(GLFWwindow* window)
     
     // draw city
     drawCity();
-    
+        
     // Gets events, including input such as keyboard and mouse or window resizing.
     glfwPollEvents();
     // Swap buffers.
@@ -636,6 +670,9 @@ bool Window::check_collision(Cube* box, Rec* building)
 // loop through all building and check collision for each of them
 bool Window::global_collision_check()
 {
+    // clear the previous collision list
+    collision_list = {};
+    
     bool collision = false;
     // loop through all building we currently have
     for(int x = 0; x < rec_list.size();x++)

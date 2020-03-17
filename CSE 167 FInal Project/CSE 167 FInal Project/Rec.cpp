@@ -42,12 +42,12 @@ Rec::Rec(glm::vec3 start_point,float length,float height,float width)
     std::vector<glm::vec3> vertices
     {
         start_point,
-        start_point+glm::vec3(0,-height,0),
-        start_point+glm::vec3(length,-height,0),
+        start_point+glm::vec3(0,height,0),
+        start_point+glm::vec3(length,height,0),
         start_point+glm::vec3(length,0,0),
         start_point+glm::vec3(0,0,-width),
-        start_point+glm::vec3(0,-height,-width),
-        start_point+glm::vec3(length,-height,-width),
+        start_point+glm::vec3(0,height,-width),
+        start_point+glm::vec3(length,height,-width),
         start_point+glm::vec3(length,0,-width),
     };
 
