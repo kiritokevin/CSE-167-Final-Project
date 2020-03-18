@@ -88,6 +88,10 @@ public:
     // draw the city
     static void drawCity();
     
+    // Generate the city
+    static void generateCity();
+    static bool is_road(int i);
+    
     
 };
 
