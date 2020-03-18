@@ -288,14 +288,14 @@ bool Window::initializeProgram()
         return false;
     }
     
-    /*programCloud = LoadShaders("shaders/cloud.vert", "shaders/cloud.frag");
+    programCloud = LoadShaders("shaders/cloud.vert", "shaders/cloud.frag");
     
     // check
     if(!programCloud)
     {
         std::cerr << "Failed to initialize skybox shader program" << std::endl;
         return false;
-    }*/
+    }
 
 	// Activate the shader program.
 	glUseProgram(program);
@@ -311,22 +311,18 @@ bool Window::initializeObjects()
 {
     // create skybox object
     sky = new skybox(5.0f, view, projection);
-    //sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
-<<<<<<< HEAD
-	//sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+
     
     sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+
 	//sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
-=======
-	sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
->>>>>>> ed3b3c5164ea75c3d69af9f6768ebb226f7e677d
+
         
     // initialize boundings
     c = new Cube(1.0f, sphere->min, sphere->max);
     
     // initialize different types of buildings (and roads)
-    // buildingA = new Rec(sphere -> min + glm::vec3(-22,0,20), 10.0f, 80.0f, 10.0f);
-    // base= new Rec(sphere->min+glm::vec3(-22,0,20),50.0f,1.0f,60.0f);
+
     
     // intialize cloud
     cloud = new Cloud();
@@ -338,6 +334,8 @@ bool Window::initializeObjects()
     starting_point = sphere->min+glm::vec3(-8,-10,20);
     
     temp = new Rec(starting_point,17,20,17,building1);
+    
+
     return true;
 }
 
@@ -507,9 +505,14 @@ void Window::displayCallback(GLFWwindow* window)
         FPVcount = 0;
         if(FreeCameraCount == 1)
         {
-            eye = glm::vec3(0, 10, 50);
+            eye = glm::vec3(0, 50, 50);
+            center = glm::vec3(0, 0, 0);
+            view = glm::lookAt(eye, center, up);
         }
-        view = glm::lookAt(eye, eye + center, up);
+        else
+        {
+            view = glm::lookAt(eye, center, up);
+        }
         
         // draw sphere
         sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
@@ -543,8 +546,12 @@ void Window::displayCallback(GLFWwindow* window)
         if(FPVcount == 1)
         {
             center = glm::vec3(0,0,0);
+            view = glm::lookAt(eye, center, up);
         }
-        view = glm::lookAt(eye, eye + center, up);
+        else
+        {
+            view = glm::lookAt(eye, center, up);
+        }
         
     }
     else if(TPV == 1)
@@ -585,9 +592,7 @@ void Window::displayCallback(GLFWwindow* window)
     cloud -> draw(programCloud, view, projection);
     // draw skybox
     sky -> draw(programSkybox, view);
-    
 
-    
     
     // draw city
     drawCity();

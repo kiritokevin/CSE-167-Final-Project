@@ -47,6 +47,17 @@ skybox::skybox(float size, glm::mat4 View, glm::mat4 Projection)
         glm::vec3(500, -500, -500),
         glm::vec3(500, 500, -500)
     };
+//       std::vector<glm::vec3> vertices
+//        {
+//            glm::vec3(1, 1, 1),
+//            glm::vec3(-1, -1, 1),
+//            glm::vec3(1, -1, 1),
+//            glm::vec3(1, 1, 1),
+//            glm::vec3(-1, 1, -1),
+//            glm::vec3(-1, -1, -1),
+//            glm::vec3(1, -1, -1),
+//            glm::vec3(1, 1, -1)
+//        };
 
     // Each ivec3(v1, v2, v3) define a triangle consists of vertices v1, v2
     // and v3 in counter-clockwise order.
@@ -103,8 +114,6 @@ skybox::skybox(float size, glm::mat4 View, glm::mat4 Projection)
     // get the textureID information
     loadTexture(textureName);
     
-    // initalize cloud texture
-    //cloud = new Cloud();
 }
 
 skybox::~skybox()
@@ -125,16 +134,18 @@ void skybox::draw(GLuint glProgram, glm::mat4 View)
     glUniform1i(glGetUniformLocation(glProgram, "Skybox"), 0);
     
     // set the sampler for cloud texture
-    glUniform1i(glGetUniformLocation(glProgram, "Cloud"), 1);
+   // glUniform1i(glGetUniformLocation(glProgram, "Cloud"), 1);
     glDepthFunc(GL_LEQUAL);
     
     // get location of all matrices
     GLuint projectionLoc = glGetUniformLocation(glProgram, "projection");
     GLuint viewLoc = glGetUniformLocation(glProgram, "view");
+    //GLuint modelLoc = glGetUniformLocation(glProgram, "model");
     
     // ... set view and projection matrix
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(View));
+    //glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
     
     // face culling
     glFrontFace(GL_CW);
@@ -146,8 +157,8 @@ void skybox::draw(GLuint glProgram, glm::mat4 View)
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
     
     // bind to cloud texture
-    glActiveTexture(GL_TEXTURE1);
-    //glBindTexture(GL_TEXTURE_2D, cloud->textureID);
+    // glActiveTexture(GL_TEXTURE1);
+    // glBindTexture(GL_TEXTURE_2D, cloud->textureID);
     
     // draw the element
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
