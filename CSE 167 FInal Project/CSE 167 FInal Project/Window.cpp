@@ -66,7 +66,7 @@ namespace
 
 	GLuint viewLoc; // Location of view in shader.
 	GLuint modelLoc; // Location of model in shader.
-    GLuint viewPosLoc; // eye position
+    //GLuint viewPosLoc; // eye position
     GLuint colorLoc;
 
     // Geometry nodes
@@ -78,55 +78,98 @@ namespace
     // boundings
     Cube* c;
     Rec* base;
-    Rec* buildingA;
     Rec* temp;
     glm::vec3 starting_point;
     Cloud* cloud;
-    
     std::vector<std::string> building1 = {
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
     };
     
     std::vector<std::string> building2 ={
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
     };
     
     std::vector<std::string> building3 = {
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
     };
     
     std::vector<std::string> road = {
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
     };
     
     std::vector<std::string> grass = {
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+        "/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
     };
+    
+//    std::vector<std::string> building1 = {
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+//    };
+//
+//    std::vector<std::string> building2 ={
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+//    };
+//
+//    std::vector<std::string> building3 = {
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+//    };
+//
+//    std::vector<std::string> road = {
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+//    };
+//
+//    std::vector<std::string> grass = {
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+//        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+//    };
     
     
     // building list
@@ -350,14 +393,14 @@ bool Window::initializeProgram()
         return false;
     }
     
-    /*programCloud = LoadShaders("shaders/cloud.vert", "shaders/cloud.frag");
+    programCloud = LoadShaders("shaders/cloud.vert", "shaders/cloud.frag");
     
     // check
     if(!programCloud)
     {
         std::cerr << "Failed to initialize skybox shader program" << std::endl;
         return false;
-    }*/
+    }
 
 	// Activate the shader program.
 	glUseProgram(program);
@@ -375,9 +418,9 @@ bool Window::initializeObjects()
     sky = new skybox(5.0f, view, projection);
 
     
-    //sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+    sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
 
-	sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+	//sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
 
         
     // initialize boundings
@@ -515,6 +558,7 @@ void Window::generateCity(){
     glm::vec3 current_point = starting_point;
     for(int i=0;i<8;i++){
         for(int j=0;j<8;j++){
+           //glm::vec3 current_point = glm::vec3(starting_point[0]+2*i,starting_point[1],starting_point[2]+2*j);
             if(roadmap[i][j]==4){
                 new_rec = new Rec(current_point,4,7,2,building1);
             }
@@ -544,60 +588,17 @@ void Window::generateCity(){
 void Window::drawCity()
 {
     for(int i = 0;i<rec_list.size();i++){
-        rec_list[i]->draw(programSphere, glm::vec3(1,1,1), debugCollision, view, projection);
-    }
-    /*temp->draw(programSphere,glm::vec3(1,1,1), debugCollision ,view ,projection);
-    glm::vec3 temp_point = starting_point;
-    for(int x = 0; x<10;x++){
-        temp_point[0]+=2;
-        Rec* temp1 = new Rec(temp_point,2,4,2,building2);
-        //temp1->draw(programSphere,glm::vec3(1,1,1), debugCollision ,view ,projection);
-    }*/
-    /*if(rec_list.size()!=0){
-        for(int x = 0; x<rec_list.size();x++){
-            delete rec_list[x];
-        }
-        rec_list={};
-    }*/
-     //glm::vec3 starting_point = sphere->min+glm::vec3(-8,0,20);
-    //buildingA ->draw(programCube, glm::vec3(0.67,1,0.5), debugCollision, view, projection);
-    /*for(int i = 0;i<8;i++){
-        for(int j = 0;j<8;j++){
-            glm::vec3 current_point = glm::vec3(starting_point[0]+2*i,starting_point[1],starting_point[2]+2*j);
-            Rec* new_rec;
-            glm::vec3 block_color;
-            if(roadmap[i][j]==4){
-                new_rec = new Rec(current_point,2,7,2,building1);
-            }
-            else if(roadmap[i][j]==5){
-                new_rec = new Rec(current_point,2,13,2,building2);
-            }
-            else if(roadmap[i][j]==6){
-                new_rec = new Rec(current_point,2,19,2,building3);
-            }
-            else{
-                new_rec = new Rec(current_point,2,1,2,road);
-            }
-            if(roadmap[i][j]==1||roadmap[i][j]==2||roadmap[i][j]==3){
-                block_color = glm::vec3(0.39,0.35,0.35);
-            }
-            else{
-                block_color = glm::vec3(0.67,1,0.5);
-            }
-            
-            // change color if collision detected
-            for(int k = 0; k < collision_list.size(); k++)
+        // change color if collision detected
+        for(int j = 0; j < collision_list.size(); j++)
+        {
+            if(i == collision_list[j])
             {
-                // if current building is under collision, change the color to red
-                if(i * 8 + j == collision_list[k])
-                {
-                    block_color = glm::vec3(1.0,0,0);
-                }
+                rec_list[i]->draw(programSphere, glm::vec3(0,0,0), debugCollision, true, view, projection);
+                break;
             }
-            new_rec->draw(programSphere,block_color, debugCollision ,view ,projection);
-            rec_list.push_back(new_rec);
         }
-    }*/
+        rec_list[i]->draw(programSphere, glm::vec3(0,0,0), debugCollision, false, view, projection);
+    }
 }
 
 void Window::displayCallback(GLFWwindow* window)
@@ -695,7 +696,10 @@ void Window::displayCallback(GLFWwindow* window)
         }
     }
     // draw cloud
-    cloud -> draw(programCloud, view, projection);
+    if(showCloud == 1)
+    {
+        cloud -> draw(programCloud, view, projection);
+    }
     // draw skybox
     sky -> draw(programSkybox, view);
 
@@ -841,10 +845,12 @@ bool Window::global_collision_check()
     {
         // check the collision with the building and the bounding box of sphere
         // continue to the next round if there is no collision
+        std::cout << "Collision" << std::endl;
         
         // collision
         if(check_collision(c, rec_list[x]))
         {
+            
             // record the index of rec_list to change the bounding box color
             collision_list.push_back(x);
             collision = true;

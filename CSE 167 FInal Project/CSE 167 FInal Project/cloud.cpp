@@ -37,7 +37,7 @@ void Cloud::draw(GLuint shaderProgram, glm::mat4 View, glm::mat4 Projection)
     // ... set model, view, projection matrix
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(Projection));
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(View));
-    glUniform1f(timeLoc, (float)glfwGetTime() * 5.0f);
+    glUniform1f(timeLoc, (float)glfwGetTime() * 0.5f);
     glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 

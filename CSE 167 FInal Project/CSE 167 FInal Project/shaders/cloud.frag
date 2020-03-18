@@ -4,7 +4,7 @@ in vec3 pos;
   out vec4 color;
   uniform float time = 0.0;
   uniform float cirrus = 0.4;
-  uniform float cumulus = 0.2;
+  uniform float cumulus = 0.7;
 
   const float Br = 0.0025;
   const float Bm = 0.0003;

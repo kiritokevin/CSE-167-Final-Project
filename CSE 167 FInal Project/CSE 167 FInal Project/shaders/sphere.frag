@@ -9,9 +9,16 @@ out vec4 Color;
 in vec3 TexCoords;
 
 uniform samplerCube Sphere;
-
+uniform int debugColor;
 
 void main()
 {
-    Color = texture(Sphere, TexCoords);
+    if(debugColor == 1)
+    {
+        Color = vec4(1.0,0.0,0.0,1.0);
+    }
+    else
+    {
+        Color = texture(Sphere, TexCoords);
+    }
 }

@@ -36,7 +36,7 @@ Rec::Rec(glm::vec3 start_point,float length,float height,float width,std::vector
     rec_width = width;
     rec_height = height;
     rec_length = length;
-    rec_max = start_point + glm::vec3(length,0,0);
+    rec_max = start_point + glm::vec3(length,height,0);
     
     // rec vertices information
     std::vector<glm::vec3> vertices
@@ -112,7 +112,7 @@ Rec::~Rec()
     glDeleteVertexArrays(1, &vao);
 }
 
-void Rec::draw(GLuint shaderProgram,glm::vec3 Color, bool check_collision, glm::mat4 View, glm::mat4 Projection)
+void Rec::draw(GLuint shaderProgram,glm::vec3 Color, bool check_collision, bool collision_detected, glm::mat4 View, glm::mat4 Projection)
 {
     glUseProgram(shaderProgram);
     glUniform1i(glGetUniformLocation(shaderProgram, "Sphere"), 1);
@@ -120,6 +120,7 @@ void Rec::draw(GLuint shaderProgram,glm::vec3 Color, bool check_collision, glm::
     GLuint viewLoc = glGetUniformLocation(shaderProgram, "view");
     GLuint modelLoc = glGetUniformLocation(shaderProgram, "model");
     GLuint colorLoc = glGetUniformLocation(shaderProgram, "color");
+    GLuint debugLoc = glGetUniformLocation(shaderProgram, "debugColor");
     
     // ... set model, view, projection matrix
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(Projection));
@@ -137,10 +138,21 @@ void Rec::draw(GLuint shaderProgram,glm::vec3 Color, bool check_collision, glm::
     // rendering line segment when detecting collision
     if (check_collision)
     {
-        glDrawElements(GL_LINE_STRIP , 36, GL_UNSIGNED_INT, 0);
+        if(collision_detected)
+        {
+            glUniform1i(debugLoc, 1);
+            glDrawElements(GL_LINE_STRIP , 36, GL_UNSIGNED_INT, 0);
+
+        }
+        else
+        {
+            glUniform1i(debugLoc, 0);
+            glDrawElements(GL_LINE_STRIP , 36, GL_UNSIGNED_INT, 0);
+        }
     }
     else
     {
+        glUniform1i(debugLoc, 0);
         glDrawElements(GL_TRIANGLES , 36, GL_UNSIGNED_INT, 0);
     }
     // Unbind from the VAO.
