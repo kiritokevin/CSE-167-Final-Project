@@ -280,14 +280,14 @@ bool Window::initializeProgram()
         return false;
     }
     
-    programCloud = LoadShaders("shaders/cloud.vert", "shaders/cloud.frag");
+    /*programCloud = LoadShaders("shaders/cloud.vert", "shaders/cloud.frag");
     
     // check
     if(!programCloud)
     {
         std::cerr << "Failed to initialize skybox shader program" << std::endl;
         return false;
-    }
+    }*/
 
 	// Activate the shader program.
 	glUseProgram(program);
@@ -305,9 +305,6 @@ bool Window::initializeObjects()
     sky = new skybox(5.0f, view, projection);
     //sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
 	sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
-    
-    sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
-	//sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
         
     // initialize boundings
     c = new Cube(1.0f, sphere->min, sphere->max);
