@@ -12,6 +12,7 @@ namespace
     int leftPressed = 0;
     int rightPressed = 0;
     int controlMode = 1;
+    int showCloud = 0;
     int freeCamera = 0;
     int FPVcount = 0;
     
@@ -1077,6 +1078,16 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     TPV = 0;
                     FPV = 0;
                     freeCamera = 1;
+                }
+                break;
+            case GLFW_KEY_K:
+                if(showCloud == 1)
+                {
+                    showCloud = 0;
+                }
+                else
+                {
+                    showCloud = 1;
                 }
                 break;
                     
