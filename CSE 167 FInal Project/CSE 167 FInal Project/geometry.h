@@ -32,6 +32,7 @@ private:
     GLuint vao, vbo[2], ebo;
 public:
     unsigned int textureID;
+    GLuint m_Textures[6];
     glm::mat4 model;
     glm::vec3 midPoint;
     glm::vec3 max;

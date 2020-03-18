@@ -81,24 +81,53 @@ namespace
     Rec* buildingA;
     Rec* temp;
     glm::vec3 starting_point;
+    Cloud* cloud;
     
     std::vector<std::string> building1 = {
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
-        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
     };
-//    std::vector<std::string> building1 = {
-//        "/Users/KZ/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
-//        "/Users/KZ/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
-//        "/Users/KZ/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
-//        "/Users/KZ/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
-//        "/Users/KZ/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
-//        "/Users/KZ/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building2.png",
-//    };
-    Cloud* cloud;
+    
+    std::vector<std::string> building2 ={
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building5.jpg",
+    };
+    
+    std::vector<std::string> building3 = {
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building3.jpg",
+    };
+    
+    std::vector<std::string> road = {
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/floor.png",
+    };
+    
+    std::vector<std::string> grass = {
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+        "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
+    };
+    
     
     // building list
     std::vector<Rec*> rec_list;
@@ -145,6 +174,15 @@ namespace
 // 3: road(column)
 // 4,5,6: different types of building
 // 7: baskerball court
+
+bool Window::is_road(int i){
+    if(i!=1&&i!=2&&i!=3){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
 
 void Window::initialize_roadmap()
 {
@@ -235,6 +273,29 @@ void Window::initialize_roadmap()
         }
     }
     
+    bool found_grass = false;
+    for(int i=0;i<7;i++){
+        for(int j = 0;j<7;j++){
+            if(is_road(roadmap[i][j])==false){
+                if(is_road(roadmap[i+1][j])==false){
+                    if(is_road(roadmap[i][j+1])==false){
+                        if(is_road(roadmap[i+1][j+1])==false){
+                            roadmap[i][j]=7;
+                            roadmap[i+1][j]=7;
+                            roadmap[i][j+1]=7;
+                            roadmap[i+1][j+1]=7;
+                            found_grass=true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if(found_grass==true){
+            break;
+        }
+    }
+    
     // two blocks' court
     
     // print out the road
@@ -289,14 +350,14 @@ bool Window::initializeProgram()
         return false;
     }
     
-    programCloud = LoadShaders("shaders/cloud.vert", "shaders/cloud.frag");
+    /*programCloud = LoadShaders("shaders/cloud.vert", "shaders/cloud.frag");
     
     // check
     if(!programCloud)
     {
         std::cerr << "Failed to initialize skybox shader program" << std::endl;
         return false;
-    }
+    }*/
 
 	// Activate the shader program.
 	glUseProgram(program);
@@ -314,9 +375,9 @@ bool Window::initializeObjects()
     sky = new skybox(5.0f, view, projection);
 
     
-    sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+    //sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
 
-	//sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+	sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
 
         
     // initialize boundings
@@ -334,7 +395,9 @@ bool Window::initializeObjects()
     // initilize the starting point of the city
     starting_point = sphere->min+glm::vec3(-8,-10,20);
     
-    temp = new Rec(starting_point,17,20,17,building1);
+    generateCity();
+    // building1 height 13
+    // building2 height 7
     
 
     return true;
@@ -441,37 +504,79 @@ void Window::idleCallback()
     }
 }
 
+void Window::generateCity(){
+    if(rec_list.size()!=0){
+        for(int x = 0; x<rec_list.size();x++){
+            delete rec_list[x];
+        }
+        rec_list={};
+    }
+    Rec* new_rec;
+    glm::vec3 current_point = starting_point;
+    for(int i=0;i<8;i++){
+        for(int j=0;j<8;j++){
+            if(roadmap[i][j]==4){
+                new_rec = new Rec(current_point,4,7,2,building1);
+            }
+            else if(roadmap[i][j]==5){
+                new_rec = new Rec(current_point,4,13,2,building2);
+            }
+            else if(roadmap[i][j]==6){
+                new_rec = new Rec(current_point,4,19,2,building3);
+            }
+            else if(roadmap[i][j]==7){
+                new_rec = new Rec(current_point,4,1,2,grass);
+            }
+            else{
+                new_rec = new Rec(current_point,4,1,2,road);
+            }
+            rec_list.push_back(new_rec);
+            current_point[2]-=2;
+        }
+        current_point[0]+=4;
+        current_point[2]=starting_point[2];
+    }
+}
 // draw the city
 //    4. draw the city
 //    1: run through the city map
 //    2: draw the block based on the number in roadmap
 void Window::drawCity()
 {
-    temp->draw(programSphere,glm::vec3(1,1,1), debugCollision ,view ,projection);
+    for(int i = 0;i<rec_list.size();i++){
+        rec_list[i]->draw(programSphere, glm::vec3(1,1,1), debugCollision, view, projection);
+    }
+    /*temp->draw(programSphere,glm::vec3(1,1,1), debugCollision ,view ,projection);
+    glm::vec3 temp_point = starting_point;
+    for(int x = 0; x<10;x++){
+        temp_point[0]+=2;
+        Rec* temp1 = new Rec(temp_point,2,4,2,building2);
+        //temp1->draw(programSphere,glm::vec3(1,1,1), debugCollision ,view ,projection);
+    }*/
     /*if(rec_list.size()!=0){
         for(int x = 0; x<rec_list.size();x++){
             delete rec_list[x];
         }
         rec_list={};
-    }
-     glm::vec3 starting_point = sphere->min+glm::vec3(-8,0,20);
+    }*/
+     //glm::vec3 starting_point = sphere->min+glm::vec3(-8,0,20);
     //buildingA ->draw(programCube, glm::vec3(0.67,1,0.5), debugCollision, view, projection);
-    for(int i = 0;i<8;i++){
+    /*for(int i = 0;i<8;i++){
         for(int j = 0;j<8;j++){
-            glm::vec3 current_point = glm::vec3(starting_point[0]+2*i,0,starting_point[2]+2*j);
+            glm::vec3 current_point = glm::vec3(starting_point[0]+2*i,starting_point[1],starting_point[2]+2*j);
             Rec* new_rec;
             glm::vec3 block_color;
             if(roadmap[i][j]==4){
-                new_rec = new Rec(current_point,2,3,2);
+                new_rec = new Rec(current_point,2,7,2,building1);
             }
             else if(roadmap[i][j]==5){
-                new_rec = new Rec(current_point,2,6,2);
+                new_rec = new Rec(current_point,2,13,2,building2);
             }
             else if(roadmap[i][j]==6){
-                new_rec = new Rec(current_point,2,9,2);
+                new_rec = new Rec(current_point,2,19,2,building3);
             }
             else{
-                new_rec = new Rec(current_point,2,1,2);
+                new_rec = new Rec(current_point,2,1,2,road);
             }
             if(roadmap[i][j]==1||roadmap[i][j]==2||roadmap[i][j]==3){
                 block_color = glm::vec3(0.39,0.35,0.35);
@@ -489,7 +594,7 @@ void Window::drawCity()
                     block_color = glm::vec3(1.0,0,0);
                 }
             }
-            new_rec->draw(programCube,block_color, debugCollision ,view ,projection);
+            new_rec->draw(programSphere,block_color, debugCollision ,view ,projection);
             rec_list.push_back(new_rec);
         }
     }*/
@@ -813,6 +918,7 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
                     
                 // initalize again
                 initialize_roadmap();
+                generateCity();
                 break;
                 
             // move left
