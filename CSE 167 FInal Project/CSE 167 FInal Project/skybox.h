@@ -27,10 +27,10 @@ public:
     glm::mat4 view;
     glm::mat4 projection;
     glm::mat4 model;
-    Cloud* cloud;
-    /*std::vector<std::string> textureName = {
+
     //Cloud* cloud;
-    std::vector<std::string> textureName = {
+    /*std::vector<std::string> textureName = {
+
         "/Users/KZ/Desktop/CSE 167/CSE 167 HW 0/CSE 167 HW 0/skybox/right.jpg",
         "/Users/KZ/Desktop/CSE 167/CSE 167 HW 0/CSE 167 HW 0/skybox/left.jpg",
         "/Users/KZ/Desktop/CSE 167/CSE 167 HW 0/CSE 167 HW 0/skybox/top.jpg",

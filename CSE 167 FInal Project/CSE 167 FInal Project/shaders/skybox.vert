@@ -23,7 +23,6 @@
 layout (location = 0) in vec3 aPos;
 
 out vec3 TexCoords;
-out vec3 pos;
 uniform mat4 projection;
 uniform mat4 view;
 //out vec3 frag;
@@ -42,5 +41,8 @@ void main()
     gl_Position = projection * view * vec4(aPos, 1.0);
     //fsun = vec3(0.0, 0.0, 0.0);
 }
+
+
+
     
 

@@ -4,7 +4,7 @@ in vec3 pos;
   out vec4 color;
   uniform float time = 0.0;
   uniform float cirrus = 0.4;
-  uniform float cumulus = 0.8;
+  uniform float cumulus = 0.2;
 
   const float Br = 0.0025;
   const float Bm = 0.0003;
@@ -45,7 +45,7 @@ in vec3 pos;
     if (pos.y < 0)
       discard;
 
-    // Atmosphere Scattering
+      
     float mu = dot(normalize(pos), normalize(fsun));
     vec3 extinction = mix(exp(-exp(-((pos.y + fsun.y * 4.0) * (exp(-pos.y * 16.0) + 0.1) / 80.0) / Br) * (exp(-pos.y * 16.0) + 0.1) * Kr / Br) * exp(-pos.y * exp(-pos.y * 8.0 ) * 4.0) * exp(-pos.y * 2.0) * 4.0, vec3(1.0 - exp(fsun.y)) * 0.2, -fsun.y * 0.2 + 0.5);
     color.rgb = 3.0 / (8.0 * 3.14) * (1.0 + mu * mu) * (Kr + Km * (1.0 - g * g) / (2.0 + g * g) / pow(1.0 + g * g - 2.0 * g * mu, 1.5)) / (Br + Bm) * extinction;
@@ -63,4 +63,5 @@ in vec3 pos;
 
     // Dithering Noise
     color.rgb += noise(pos * 1000) * 0.01;
+    color.a = 0.5;
   }

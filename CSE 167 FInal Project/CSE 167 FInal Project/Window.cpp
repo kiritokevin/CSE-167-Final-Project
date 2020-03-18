@@ -80,6 +80,7 @@ namespace
     Rec* buildingA;
     Rec* temp;
     glm::vec3 starting_point;
+    Cloud* cloud;
     
     std::vector<std::string> building1 = {
         "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/building4.jpg",
@@ -126,7 +127,6 @@ namespace
         "/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/textures/grass.jpg",
     };
     
-    Cloud* cloud;
     
     // building list
     std::vector<Rec*> rec_list;
@@ -372,15 +372,18 @@ bool Window::initializeObjects()
 {
     // create skybox object
     sky = new skybox(5.0f, view, projection);
+
+    
     //sphere = new Geometry("/Users/KZ/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+
 	sphere = new Geometry("/Users/yilincai/CSE167/CSE-167-Final-Project/CSE 167 FInal Project/CSE 167 FInal Project/shaders/obj/sphere.obj");
+
         
     // initialize boundings
     c = new Cube(1.0f, sphere->min, sphere->max);
     
     // initialize different types of buildings (and roads)
-    // buildingA = new Rec(sphere -> min + glm::vec3(-22,0,20), 10.0f, 80.0f, 10.0f);
-    // base= new Rec(sphere->min+glm::vec3(-22,0,20),50.0f,1.0f,60.0f);
+
     
     // intialize cloud
     cloud = new Cloud();
@@ -394,7 +397,8 @@ bool Window::initializeObjects()
     generateCity();
     // building1 height 13
     // building2 height 7
-    temp = new Rec(starting_point,2,10,2,building1);
+    
+
     return true;
 }
 
@@ -606,9 +610,14 @@ void Window::displayCallback(GLFWwindow* window)
         FPVcount = 0;
         if(FreeCameraCount == 1)
         {
-            eye = glm::vec3(0, 10, 50);
+            eye = glm::vec3(0, 50, 50);
+            center = glm::vec3(0, 0, 0);
+            view = glm::lookAt(eye, center, up);
         }
-        view = glm::lookAt(eye, eye + center, up);
+        else
+        {
+            view = glm::lookAt(eye, center, up);
+        }
         
         // draw sphere
         sphere -> draw(programSphere, glm::mat4(1.0f), view, projection);
@@ -642,8 +651,12 @@ void Window::displayCallback(GLFWwindow* window)
         if(FPVcount == 1)
         {
             center = glm::vec3(0,0,0);
+            view = glm::lookAt(eye, center, up);
         }
-        view = glm::lookAt(eye, eye + center, up);
+        else
+        {
+            view = glm::lookAt(eye, center, up);
+        }
         
     }
     else if(TPV == 1)
@@ -684,9 +697,7 @@ void Window::displayCallback(GLFWwindow* window)
     cloud -> draw(programCloud, view, projection);
     // draw skybox
     sky -> draw(programSkybox, view);
-    
 
-    
     
     // draw city
     drawCity();
