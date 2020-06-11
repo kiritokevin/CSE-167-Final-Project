@@ -1,4 +1,4 @@
-# CSE-167-Final-Project  
+# CSE-167-Final-Project: Wandering Ball written in OpenGL
 ## Blog website: https://jolinandkevin.blogspot.com/  
 ## Keys:
 ### W: Go forward
